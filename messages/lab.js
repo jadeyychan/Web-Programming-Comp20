@@ -1,8 +1,8 @@
 /* Parses and prints data */
 
-function parse() {
+
 	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
+	xhr.onreadystatechange = parse() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			  	var response = xhr.responseText;
 			  	parsed_objects = JSON.parse(response);
@@ -21,4 +21,3 @@ function parse() {
 		}
 	}
 xhr.open("get", "data.json", true);
-}
