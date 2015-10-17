@@ -2,9 +2,9 @@
 
 function parse() {
 	var xhr = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			  	var response = xmlhttp.responseText;
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			  	var response = xhr.responseText;
 			  	parsed_objects = JSON.parse(response);
 	    		elem = document.getElementById("messages");
 	    		
@@ -15,6 +15,5 @@ function parse() {
 				}
 		}
 	}
-
 xhr.open("get", "data.json", true);
 }
