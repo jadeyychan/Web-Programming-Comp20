@@ -1,5 +1,5 @@
 /* Parses and prints data */
-function parse(jsondata) {
+function parse() {
     var xmlhttp = new XMLHttpRequest();
     var jsondata = xmlhttp.open("get", "data.json", true);
     parsed_objects = JSON.parse(jsondata);
