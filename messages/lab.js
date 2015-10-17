@@ -1,8 +1,5 @@
 var xmlhttp = new XMLHttpRequest();
-var source = "data.json";
-
-xmlhttp.open("GET", source, true);
-xmlhttp.send();
+var jsondata = xmlhttp.open("get", "data.json", true);
 
 /* Parses and prints data */
 function parse(jsondata) {
