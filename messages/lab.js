@@ -1,23 +1,29 @@
 /* Parses and prints data */
 
+function parse() {
 
 	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = parse() {
+	var source = "data.json";
+
+	xhr.onreadystatechange = function () {
 		if (xhr.readyState == 4 && xhr.status == 200) {
-			  	var response = xhr.responseText;
-			  	parsed_objects = JSON.parse(response);
-			  	console.log("about to print response");
-			  	console.log(response);
-			  	console.log("about to print parsed_objects");
-			  	console.log(parsed_objects);
-	    		elem = document.getElementById("messages");
-	    		
-	    		for (i = 0; i < parsed_objects.length; i++) {
-		    		console.log("made it into parsed objects for loop!");
-		    		var content = parsed_objects[i]["content"];
-		    		var username = parsed_objects[i]["username"];
-		            elem.innerHTML += "<p>" + "<c>" + content + "</c>" + "<us>" + username + "</us>"+ "</p>";
-				}
+		  	var response = xhr.responseText;
+		  	var parsed_objects = JSON.parse(response);
+		  	display(parsed_objects);
+		  }
 		}
-	}
-xhr.open("get", "data.json", true);
+
+	xhr.open("get", "data.json", true);
+	xhr.send();
+
+	function display(parsed_objects) {
+		elem = document.getElementById("messages");
+		
+		for (i = 0; i < parsed_objects.length; i++) {
+    		console.log("made it into parsed objects for loop!");
+    		var content = parsed_objects[i]["content"];
+    		var username = parsed_objects[i]["username"];
+            elem.innerHTML += "<p>" + "<c>" + content + "</c>" + "<us>" + username + "</us>"+ "</p>";
+			}
+		}
+}
