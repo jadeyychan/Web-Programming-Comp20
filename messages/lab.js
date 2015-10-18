@@ -1,9 +1,9 @@
 /* Parses and prints data */
 function parse() {
-
 	var xhr = new XMLHttpRequest();
 	var url = "data.json";
 
+	/* Recieving and parsing data */
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 		  	var response = xhr.responseText;
@@ -11,10 +11,11 @@ function parse() {
 		  	display(parsed_objects);
 		  }
 		}
-
+		
 	xhr.open("get", url, true);
 	xhr.send();
 
+	/* Printing data */
 	function display(parsed_objects) {
 		elem = document.getElementById("messages");
 		
