@@ -1,7 +1,6 @@
 /* Styling for the content */
 c {
-	color: white;
-	background-color: black;
+	color: black;
 	font-size: 20px;
 	padding-left: 10px;
 
@@ -10,8 +9,7 @@ c {
 
 /* Styling for the username */
 us {
-	color: white;
-	background-color: black;
+	color: gray;
 	font-size: 12px;
 	padding-left: 6px;
 }
