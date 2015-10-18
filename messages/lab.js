@@ -1,9 +1,8 @@
 /* Parses and prints data */
-
 function parse() {
 
 	var xhr = new XMLHttpRequest();
-	var source = "data.json";
+	var url = "data.json";
 
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState == 4 && xhr.status == 200) {
@@ -13,7 +12,7 @@ function parse() {
 		  }
 		}
 
-	xhr.open("get", "data.json", true);
+	xhr.open("get", url, true);
 	xhr.send();
 
 	function display(parsed_objects) {
