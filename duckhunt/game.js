@@ -5,6 +5,10 @@ function init() {
 	var background = new Image();
 	var birds = new Image();
 
+	/* Linked images */
+	background.src = "duckhunt-background.gif";
+	birds.src = "duckhunt_various_sheet.png";
+	
 	background.onload = function () {
 		/* Background */
 		ctx.drawImage(background, 0,0, 256, 240, 0, 0, 640, 600);
@@ -16,7 +20,4 @@ function init() {
 		ctx.drawImage(birds, 335, 115, 40, 40, 350, 100, 80, 80);
 	}
 
-	/* Linked images */
-	background.src = "duckhunt-background.gif";
-	birds.src = "duckhunt_various_sheet.png";
 }

@@ -1,6 +1,15 @@
-/* Your CSS here... */
+/* Styling for the content */
+c {
+	color: black;
+	font-size: 20px;
+	padding-left: 10px;
 
-body {
+}
 
-	color: blue;
+
+/* Styling for the username */
+us {
+	color: gray;
+	font-size: 12px;
+	padding-left: 6px;
 }
