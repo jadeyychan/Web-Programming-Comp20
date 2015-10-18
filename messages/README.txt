@@ -4,10 +4,16 @@ Assignment: Lab #5
 --------------------------------------------------------------------------
 
 To my knowledge, all parts of the lab have been implemented correctly.
-The background and 2 birds display. They are all scaled to be larger, but
-still proprtional. As of now, the animation of the birds flapping its wings
-are not implemented.
+The lab reads in, parses, and prints the data correctly.
 
-People who have helped: Elif Kinli, Ogul Girgin
+People who have helped: Niketan Patel
 
-Time spent: 1 hour
+Time spent: 2 hour
+
+--------------------------------------------------------------------------
+
+Is it possible to requestion data from a different origin or from your 
+local machine from using XMLHttpRequest?
+
+
+
