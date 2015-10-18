@@ -1,7 +1,7 @@
 /* Parses and prints data */
 function parse() {
 	var xhr = new XMLHttpRequest();
-	var url = "data.json";
+	var url = "http://messagehub.herokuapp.com/messages.json";
 
 	/* Recieving and parsing data */
 	xhr.onreadystatechange = function () {
