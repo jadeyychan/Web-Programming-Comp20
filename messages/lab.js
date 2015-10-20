@@ -20,7 +20,6 @@ function parse() {
 		elem = document.getElementById("messages");
 		
 		for (i = 0; i < parsed_objects.length; i++) {
-    		console.log("made it into parsed objects for loop!");
     		var content = parsed_objects[i]["content"];
     		var username = parsed_objects[i]["username"];
             elem.innerHTML += "<p>" + "<c>" + content + "</c>" + "<us>" + username + "</us>"+ "</p>";
