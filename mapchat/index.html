@@ -37,9 +37,9 @@
 				console.log("inside if get_my_location function");
 				navigator.geolocation.getCurrentPosition(function(position) {
 					my_lat: position.coords.latitude,
-					console.log(my_lat);
+					console.log("my_lat");
 					my_lng: position.coords.longitude
-					console.log(my_lng);
+					console.log("my_lng");
 					draw_map();
 				});
 			} else {
