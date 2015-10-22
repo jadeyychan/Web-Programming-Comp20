@@ -5,13 +5,14 @@
 	<title> Mapchat </title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="style.css"/>
 	
 	<script>
 
 		var my_lat = 0;
 		var my_lng = 0;
 		var me = new google.maps.LatLng(my_lat, my_lng);
+
 		var map_options = {
 			zoom: 8,
 			center: me,
@@ -28,7 +29,7 @@
 
 </head>
 
-<body>
+<body onload="initMap()">
 	<!-- Making the space for the canvas -->
 	<div id="map_canvas"></div>
 	</body>
