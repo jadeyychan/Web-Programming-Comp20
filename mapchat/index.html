@@ -2,13 +2,25 @@
 
 <html>
 <head>
-	<title>Mapchat</title>
+	<title> Mapchat </title>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 	<link rel="stylesheet" href="style.css" type="text/css" />
+	
+	<script>
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: 0, lng: 0},
+			zoom: 8
+		});
+	</script>
 
 </head>
 
-
 <body>
+	<!-- Making the space for the canvas -->
+	<div id="map_canvas"></div>
+
+		<!-- <body onload="init()"> -->
+		<div id="map_canvas"></div>
 
 	</body>
 

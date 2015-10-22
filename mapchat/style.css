@@ -1,14 +1,9 @@
-/* Styling for the content */
-c {
-	color: palegreen;
-	font-size: 20px;
-	padding-left: 10px;
-
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
-/* Styling for the username */
-us {
-	color: gray;
-	font-size: 12px;
-	padding-left: 6px;
+#map {
+	height: 100%;
 }
