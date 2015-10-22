@@ -27,7 +27,6 @@
 			get_my_location();
 		}
 
-
 		/* Getting my location */
 		function get_my_location() {
 			if (navigator.geolocation) {
@@ -42,7 +41,7 @@
 			}
 		}
 
-		/* Drawing new map */
+		/* Updating to my location */
 		function draw_map() {
 			console.log("inside draw_map function");
 			var me = new google.maps.LatLng(my_lat, my_lng);
@@ -50,55 +49,29 @@
 			/* Update map and pan to me */
 			map.panTo(me);
 
+
+
+
+			var content_string = "<div class = 'string_content'>" + "Jade is here!" + "</div>";
+
 			var marker = new google.maps.Marker ({
 				position: me,
 				title: "Hello!"
 			});
+
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
+
+			marker.addListener('click', function() {
+    			infowindow.open(map, marker);
+  			});
 
 			/* Adding marker to map */
 			console.log("about to set marker to map");
 			marker.setMap(map);
 
 		}
-
-// 		var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-// var mapOptions = {
-//   zoom: 4,
-//   center: myLatlng
-// }
-// var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-// var marker = new google.maps.Marker({
-//     position: myLatlng,
-//     title:"Hello World!"
-// });
-
-// To add the marker to the map, call setMap();
-// marker.setMap(map);
-
-
-
-
-	// 	}
-
-	//   if (navigator.geolocation) {
-	//     navigator.geolocation.getCurrentPosition(function(position) {
-	//       var pos = {
-	//         lat: position.coords.latitude,
-	//         lng: position.coords.longitude
-	//       };
-
-	//       infoWindow.setPosition(pos);
-	//       infoWindow.setContent('Location found.');
-	//       map.setCenter(pos);
-	//     }, function() {
-	//       handleLocationError(true, infoWindow, map.getCenter());
-	//     });
-	//   } else {
-	//     // Browser doesn't support Geolocation
-	//     handleLocationError(false, infoWindow, map.getCenter());
-	//   }
-	// }
 
 
 	</script>
