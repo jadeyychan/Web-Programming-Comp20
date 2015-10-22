@@ -9,74 +9,95 @@
 	
 	<script>
 
-		var request = new XMLHttpRequest();
-		/* Declares my variables and options*/
-		var my_lat = 0;
-		var my_lng = 0;
-		var me = new google.maps.LatLng(my_lat, my_lng);
-		var map_options = {
-			zoom: 8,
-			center: me,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
-		var map;
+		function init() {
 
-		/* Draws map according to specifications */
-		function initMap() {
-			map = new google.maps.Map(document.getElementById("map"), map_options);
-			get_my_location();
-		}
-
-		/* Getting my location */
-		function get_my_location() {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function(position) {
-					my_lat = position.coords.latitude;
-					my_lng = position.coords.longitude;
-					update_map();
-				});
-			} 
-			else {
-				alert("Your browser doesn't support geolocation!");
+			/* XML request variables */
+			var request = new XMLHttpRequest();
+			var url = "https://secret-about-box.herokuapp.com/sendLocation";
+			
+			request.onreadystatechange = function () {
+				(if request.readyState == 4 && request.status == 200) {
+					var response = request.responseText;
+					var parsed_objects = JSON.parse(response);
+					init_map(parsed_objects);
+					// What do I do with the response?
+				}
 			}
-		}
 
-		/* Updating to my location */
-		function update_map() {
-			var me = new google.maps.LatLng(my_lat, my_lng);
-
-			/* Update map and pan to me */
-			map.panTo(me);
-
-
-
-
-			var content_string = "<div class = 'string_content'>" + "Jade is here!" + "</div>";
-
-			var marker = new google.maps.Marker ({
-				position: me,
-				title: "Hello!"
-			});
-
-			var infowindow = new google.maps.InfoWindow({
-				content: content_string
-			});
-
-			marker.addListener('click', function() {
-    			infowindow.open(map, marker);
-  			});
-
-			/* Adding marker to map */
-			marker.setMap(map);
+			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
+			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			request.send("the endcoded thing");
 
 		}
 
+
+		// /* Declares my variables and options*/
+		// var my_lat = 0;
+		// var my_lng = 0;
+		// var me = new google.maps.LatLng(my_lat, my_lng);
+		// var map_options = {
+		// 	zoom: 8,
+		// 	center: me,
+		// 	mapTypeId: google.maps.MapTypeId.ROADMAP
+		// };
+		// var map;
+
+		// /* Draws map according to specifications */
+		// function initMap() {
+		// 	map = new google.maps.Map(document.getElementById("map"), map_options);
+		// 	get_my_location();
+		// }
+
+		// /* Getting my location */
+		// function get_my_location() {
+		// 	if (navigator.geolocation) {
+		// 		navigator.geolocation.getCurrentPosition(function(position) {
+		// 			my_lat = position.coords.latitude;
+		// 			my_lng = position.coords.longitude;
+		// 			update_map();
+		// 		});
+		// 	} 
+		// 	else {
+		// 		alert("Your browser doesn't support geolocation!");
+		// 	}
+		// }
+
+		// /* Updating to my location */
+		// function update_map() {
+		// 	var me = new google.maps.LatLng(my_lat, my_lng);
+
+		// 	/* Update map and pan to me */
+		// 	map.panTo(me);
+
+
+
+
+		// 	var content_string = "<div class = 'string_content'>" + "Jade is here!" + "</div>";
+
+		// 	var marker = new google.maps.Marker ({
+		// 		position: me,
+		// 		title: "Hello!"
+		// 	});
+
+		// 	var infowindow = new google.maps.InfoWindow({
+		// 		content: content_string
+		// 	});
+
+		// 	marker.addListener('click', function() {
+  //   			infowindow.open(map, marker);
+  // 			});
+
+		// 	/* Adding marker to map */
+		// 	marker.setMap(map);
+
+		// }
 
 	</script>
 
+
 </head>
 
-<body onload="initMap()">
+<body onload="init()">
 	<!-- Making the space for the canvas -->
 	<div id="map"></div>
 	</body>
