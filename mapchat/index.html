@@ -46,20 +46,20 @@
 		function draw_map() {
 			console.log("inside draw_map function");
 			var me = new google.maps.LatLng(my_lat, my_lng);
-			map = google.maps.Map(document.getElementById("map"), map_options);
+
+			/* Update map and pan to me */
+			map.panTo(me);
+
 			var marker = new google.maps.Marker ({
 				position: me,
 				title: "Hello!"
 			});
+
+			/* Adding marker to map */
+			console.log("about to set marker to map");
+			marker.setMap(map);
+
 		}
-
-		/* Adding marker to map */
-		console.log("about to set marker to map");
-		marker.setMap(map);
-
-
-
-		// }
 
 // 		var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
 // var mapOptions = {
