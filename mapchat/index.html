@@ -36,17 +36,18 @@
 			if (navigator.geolocation) {
 				console.log("inside if get_my_location function");
 				navigator.geolocation.getCurrentPosition(function(position) {
+					console.log("inside getcurrentposition");
 					my_lat = position.coords.latitude;
 					console.log("my_lat");
 					my_lng = position.coords.longitude;
 					console.log("my_lng");
 					draw_map();
 				});
-			} else {
+			} 
+			else {
 				alert("Your browser doesn't support geolocation!");
 			}
 		}
-
 
 
 		function draw_map() {
