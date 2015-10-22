@@ -33,9 +33,7 @@
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(position) {
 					my_lat = position.coords.latitude;
-					console.log(my_lat);
 					my_lng = position.coords.longitude;
-					console.log(my_lng);
 					draw_map();
 				});
 			} 
@@ -44,10 +42,20 @@
 			}
 		}
 
+		/* Drawing new map */
 		function draw_map() {
-			console.log("do we get here?");
+			console.log("inside draw_map function");
+			var me = new google.maps.LatLng(my_lat, my_lng);
+			map = google.maps.Map(document.getElementById("map"), map_options);
+			var marker = new google.maps.Marker ({
+				position.me,
+				title: "Hello!"
+			});
 		}
 
+		/* Adding marker to map */
+		console.log("about to set marker to map");
+		marker.setMap(map);
 
 
 
