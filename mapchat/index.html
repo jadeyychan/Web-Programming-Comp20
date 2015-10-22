@@ -37,7 +37,21 @@
 
 		}
 
+		function init_map(parsed_objects) {
+			console.log("inside init_map!");
+			elem = document.getElementById("map");
 
+			for (i = 0; i < parsed_objects.length; i++) {
+				console.log("inside for loop!");
+	    		var id = parsed_objects[i]["_id"];
+	    		var login = parsed_objects[i]["login"];
+	    		var lat = parsed_objects[i]["lat"];
+	    		var lng = parsed_objects[i]["lng"];
+	    		var lng = parsed_objects[i]["message"];
+	            elem.innerHTML += "<p>" + login + "</p>";
+				}
+		}
+		
 		// /* Declares my variables and options*/
 		// var my_lat = 0;
 		// var my_lng = 0;
