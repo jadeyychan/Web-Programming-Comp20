@@ -40,7 +40,10 @@
 		function init_map(parsed_objects) {
 			console.log("inside init_map!");
 			elem = document.getElementById("map");
+			console.log("assigned elem");
+			console.log(elem);
 
+			console.log("about to go into for loop");
 			for (i = 0; i < parsed_objects.length; i++) {
 				console.log("inside for loop!");
 	    		var id = parsed_objects[i]["_id"];
