@@ -30,7 +30,9 @@
 
 		/* Getting my location */
 		function get_my_location() {
+			console.log("inside get_my_location function");
 			if (navigator.geolocation) {
+				console.log("inside if get_my_location function");
 				navigator.geolocation.getCurrentPosition(function(position) {
 					my_lat: position.coords.latitude,
 					console.log(my_lat);
@@ -44,7 +46,9 @@
 		}
 
 
-		// function draw_map() {
+		function draw_map() {
+			console.log("do we get here?");
+		}
 
 
 
