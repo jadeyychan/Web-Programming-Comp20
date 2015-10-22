@@ -23,7 +23,9 @@
 
 		/* Draws map according to specifications */
 		function initMap() {
+			console.log("inside initmap");
 			map = new google.maps.Map(document.getElementById("map"), map_options);
+			console.log("about to call get_my_location function");
 			get_my_location();
 		}
 
