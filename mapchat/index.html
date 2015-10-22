@@ -33,7 +33,7 @@
 				navigator.geolocation.getCurrentPosition(function(position) {
 					my_lat = position.coords.latitude;
 					my_lng = position.coords.longitude;
-					draw_map();
+					update_map();
 				});
 			} 
 			else {
@@ -42,8 +42,7 @@
 		}
 
 		/* Updating to my location */
-		function draw_map() {
-			console.log("inside draw_map function");
+		function update_map() {
 			var me = new google.maps.LatLng(my_lat, my_lng);
 
 			/* Update map and pan to me */
@@ -68,7 +67,6 @@
   			});
 
 			/* Adding marker to map */
-			console.log("about to set marker to map");
 			marker.setMap(map);
 
 		}
