@@ -25,6 +25,7 @@
 					var response = request.responseText;
 					console.log("got request???");
 					var parsed_objects = JSON.parse(response);
+					console.log(parsed_objects);
 					console.log("parsed objects!");
 					init_map(parsed_objects);
 					// What do I do with the response?
