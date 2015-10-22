@@ -27,7 +27,7 @@
 
 
 		/* Getting my location */
-		function get_my_location {
+		function get_my_location() {
 			(if navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(position) {
 					my_lat: position.coords.latitude,
