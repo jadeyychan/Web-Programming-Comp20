@@ -8,22 +8,63 @@
 	<link rel="stylesheet" href="style.css"/>
 	
 	<script>
-
+		/* Declares my variables and options*/
 		var my_lat = 0;
 		var my_lng = 0;
 		var me = new google.maps.LatLng(my_lat, my_lng);
-
 		var map_options = {
 			zoom: 8,
 			center: me,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
-
 		var map;
 
+		/* Draws map according to specifications */
 		function initMap() {
 			map = new google.maps.Map(document.getElementById("map"), map_options);
+			get_my_location();
 		}
+
+
+		/* Getting my location */
+		function get_my_location {
+			(if navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					my_lat: position.coords.latitude,
+					my_lng: position.coords.longitude
+					draw_map();
+				});
+			} else {
+				alert("Your browser doesn't support geolocation!");
+			}
+		}
+
+
+
+
+
+
+	// 	}
+
+	//   if (navigator.geolocation) {
+	//     navigator.geolocation.getCurrentPosition(function(position) {
+	//       var pos = {
+	//         lat: position.coords.latitude,
+	//         lng: position.coords.longitude
+	//       };
+
+	//       infoWindow.setPosition(pos);
+	//       infoWindow.setContent('Location found.');
+	//       map.setCenter(pos);
+	//     }, function() {
+	//       handleLocationError(true, infoWindow, map.getCenter());
+	//     });
+	//   } else {
+	//     // Browser doesn't support Geolocation
+	//     handleLocationError(false, infoWindow, map.getCenter());
+	//   }
+	// }
+
 
 	</script>
 
