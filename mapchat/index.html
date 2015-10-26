@@ -83,13 +83,15 @@
 
 		function add_marker(map, id, login, pos, mess) {
 
-			var marker = new google.maps.Marker({
+			var marker=new google.maps.Marker({
 				position: pos,
 				title: login
 			});
 
-			var infowindow = new google.maps.InfoWindow({
-				content: mess
+			var infowindow=new google.maps.InfoWindow({
+				var contentstring='<div id = "content">'+"<log>"+"login: "+login+"</ln>"
+														+"<msg>"+"message: "+mess+"</msg>"
+														+'</div>'
 			});
 
 			marker.addListener('click', function() {
@@ -99,77 +101,6 @@
 			/* Adding marker to map */
 			marker.setMap(map);
 		}
-
-
-		// 	var content_string = "<div class = 'string_content'>" + "Jade is here!" + "</div>";
-
-		// 	var marker = new google.maps.Marker ({
-		// 		position: me,
-		// 		title: "Hello!"
-		// 	});
-
-		// 	var infowindow = new google.maps.InfoWindow({
-		// 		content: content_string
-		// 	});
-
-		// 	marker.addListener('click', function() {
-  //   			infowindow.open(map, marker);
-  // 			});
-
-		// 	/* Adding marker to map */
-		// 	marker.setMap(map);
-
-
-
-
-
-		// function draw_all_locations()
-
-
-		// 	elem = document.getElementById("map");
-
-		// 	for (i = 0; i < parsed_objects.length; i++) {
-	 //    		var id = parsed_objects[i]["_id"];
-	 //    		var login = parsed_objects[i]["login"];
-	 //    		var lat = parsed_objects[i]["lat"];
-	 //    		var lng = parsed_objects[i]["lng"];
-	 //    		var lng = parsed_objects[i]["message"];
-	 //            elem.innerHTML += "<p>" + login + "</p>";
-		// 		}
-		// }
-	
-
-			/* Declares my variables and options*/
-			// console.log("inside get_my_location");
-			// var my_lat = 0;
-			// var my_lng = 0;
-			// var me = new google.maps.LatLng(my_lat, my_lng);
-			// var map_options = {
-			// 	zoom: 8,
-			// 	center: me,
-			// 	mapTypeId: google.maps.MapTypeId.ROADMAP
-			// };
-
-			// var map = new google.maps.Map(document.getElementById("map"), map_options);
-			// // 	console.log("calling get my location");
-			// };
-			// var map;
-
-			//  Draws map according to specifications 
-			// // function initMap() {
-			// 	map = new google.maps.Map(document.getElementById("map"), map_options);
-			// 	console.log("calling get my location");
-			// 	get_my_location();
-
-
-
-		// /* Updating to my location */
-		// function update_map() {
-		// 	var me = new google.maps.LatLng(my_lat, my_lng);
-
-		// 	/* Update map and pan to me */
-		// 	map.panTo(me);
-
 
 	</script>
 
