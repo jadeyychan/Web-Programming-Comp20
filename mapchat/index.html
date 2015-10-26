@@ -102,9 +102,9 @@
 
 		function add_marker(map, my_lat, my_lng, login, lat, lng, mess, d) {
     		var pos = new google.maps.LatLng(lat, lng);	
-    		console.log("pos", pos);
+    		console.log("mylat", my_lat);
     		var my_pos=new google.maps.LatLng(my_lat, my_lng);
-    		console.log("my_pos", my_pos);
+    		console.log("nolat", lat);
 
     		if (pos = my_pos) {
     			console.log("me!");
