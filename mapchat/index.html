@@ -101,37 +101,38 @@
 			                Math.sin(dLng/2) * Math.sin(dLng/2);  
 				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 				var d = R * c; 
-				console.log(d);
+				
+				add_marker(map, my_lat, my_lng, login, lat, lng, mess, d);
 
 			}
 
 
-		// function add_marker(map, my_lat, my_lng, login, lat, lng, mess) {
-  //   		var pos = new google.maps.LatLng(lat, lng);	
-  //   		var my_pos=new google.maps.LatLng(my_lat, my_lng);
+		function add_marker(map, my_lat, my_lng, login, lat, lng, mess, d) {
+    		var pos = new google.maps.LatLng(lat, lng);	
+    		var my_pos=new google.maps.LatLng(my_lat, my_lng);
 
-		// 	var marker=new google.maps.Marker({
-		// 		position: pos,
-		// 		title: login
-		// 	});
+			var marker=new google.maps.Marker({
+				position: pos,
+				title: login
+			});
 
 
-		// 	var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
-		// 											+"<div id='msg'>"+"message: "+mess+"</div>"
-		// 											+"<div id='dis'>"+"distance: "+distance+"</div>"
-		// 											+'</div>';
+			var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
+													+"<div id='msg'>"+"message: "+mess+"</div>"
+													+"<div id='dis'>"+"distance: "+d+"</div>"
+													+'</div>';
 
-		// 	var infowindow=new google.maps.InfoWindow({
-		// 		content: content_string
-		// 	});
+			var infowindow=new google.maps.InfoWindow({
+				content: content_string
+			});
 
-		// 	marker.addListener('click', function() {
-		// 		infowindow.open(map, marker);
-		// 	});
+			marker.addListener('click', function() {
+				infowindow.open(map, marker);
+			});
 
-		// 	/* Adding marker to map */
-		// 	marker.setMap(map);
-		// }
+			/* Adding marker to map */
+			marker.setMap(map);
+		}
 
 	</script>
 
