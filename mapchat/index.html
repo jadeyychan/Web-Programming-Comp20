@@ -110,7 +110,7 @@
     		if (d == 0) {
     			console.log("me!");
 
-				var image = 'black.png';
+				var image = 'arr.png';
     			var marker=new google.maps.Marker({
     				position: my_pos,
     				title: login,
@@ -118,9 +118,9 @@
     			});
 
 	    		var content_string='<div id = "content">'+
-	    						   "<div id='attr'>"+"Login: "+"</div>"+"<val>"+login+"</val>"+
-	    						   "<div id='attr'>"+"Message: "+"</div>"+"<val>"+mess+"</val>"+
-	    						   "<div id='attr'>"+"Distance: "+"</div>"+"<val>"+"This is me!"+"</val>"+
+	    						   "<div id='attr'>"+"Login: "+"<val>"+login+"</val>"+"</div>"+
+	    						   "<div id='attr'>"+"Message: "+"<val>"+mess+"</val>"+"</div>"+
+	    						   "<div id='attr'>"+"Distance: "+"<val>"+"This is me!"+"</val>"+"</div>"+
 	    						   "</div>";
 
 	   			var infowindow=new google.maps.InfoWindow({
