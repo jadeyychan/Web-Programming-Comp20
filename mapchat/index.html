@@ -10,13 +10,134 @@
 	<script>
 
 		function init() {
-			console.log("inside init function");
-
-			console.log("calling get my location");
 			get_my_location();
 		}
 
+		/* Getting my location */
+		function get_my_location() {
 
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					my_lat = position.coords.latitude;
+					my_lng = position.coords.longitude;
+					contact_server(my_lat, my_lng);
+				});
+			} 
+			else {
+				alert("Your browser doesn't support geolocation!");
+			}
+		}
+
+		function contact_server(my_lat, my_lng) {
+			/* XML request variables */
+			var request = new XMLHttpRequest();
+			var url = "https://secret-about-box.herokuapp.com/sendLocation";
+			var params = "login="+"JanetGage"+"&lat="+my_lat+"&lng="+my_lng+"&message="+"mymessage";
+			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
+			
+			/* Send proper header information */
+			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			request.setRequestHeader("Content-length", params.length);
+			request.setRequestHeader("Connection", "close");
+
+			request.onreadystatechange = function () {
+				if (request.readyState == 4 && request.status == 200) {
+					var response = request.responseText;
+					var parsed_objects = JSON.parse(response);
+					draw_init_map(parsed_objects, my_lat, my_lng);
+					// What do I do with the response?
+				}
+			}
+			request.send(params);
+
+		}
+
+		function draw_init_map(parsed_objects, my_lat, my_lng) {
+			console.log("init_map");
+
+			var me = new google.maps.LatLng(my_lat, my_lng);
+			var map_options = {
+				zoom: 8,
+				center: me,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+
+			var map;
+			var elem = document.getElementById("map");
+
+			map = new google.maps.Map(elem, map_options);
+
+			for (i = 0; i < parsed_objects.length; i++) {
+	    		var id = parsed_objects[i]["_id"];
+	    		var login = parsed_objects[i]["login"];
+	    		var lat = parsed_objects[i]["lat"];
+	    		var lng = parsed_objects[i]["lng"];
+	    		var pos = new google.maps.LatLng(lat, lng);
+	    		var mess = parsed_objects[i]["message"];
+
+	    		add_marker(map, id, login, pos, mess);
+	            // elem.innerHTML += "<p>" + login + "</p>";
+				}
+
+		}
+
+		function add_marker(map, id, login, pos, mess) {
+
+			var marker = new google.maps.Marker({
+				position: pos,
+				title: login
+			});
+
+			var infowindow = new google.maps.InfoWindow({
+				content: mess;
+			});
+
+			marker.addListener('click', function() {
+				infowindow.open(map, marker);
+			});
+
+			/* Adding marker to map */
+			marker.setMap(map);
+		}
+
+
+		// 	var content_string = "<div class = 'string_content'>" + "Jade is here!" + "</div>";
+
+		// 	var marker = new google.maps.Marker ({
+		// 		position: me,
+		// 		title: "Hello!"
+		// 	});
+
+		// 	var infowindow = new google.maps.InfoWindow({
+		// 		content: content_string
+		// 	});
+
+		// 	marker.addListener('click', function() {
+  //   			infowindow.open(map, marker);
+  // 			});
+
+		// 	/* Adding marker to map */
+		// 	marker.setMap(map);
+
+
+
+
+
+		// function draw_all_locations()
+
+
+		// 	elem = document.getElementById("map");
+
+		// 	for (i = 0; i < parsed_objects.length; i++) {
+	 //    		var id = parsed_objects[i]["_id"];
+	 //    		var login = parsed_objects[i]["login"];
+	 //    		var lat = parsed_objects[i]["lat"];
+	 //    		var lng = parsed_objects[i]["lng"];
+	 //    		var lng = parsed_objects[i]["message"];
+	 //            elem.innerHTML += "<p>" + login + "</p>";
+		// 		}
+		// }
+	
 
 			/* Declares my variables and options*/
 			// console.log("inside get_my_location");
@@ -39,76 +160,7 @@
 			// 	map = new google.maps.Map(document.getElementById("map"), map_options);
 			// 	console.log("calling get my location");
 			// 	get_my_location();
-			
 
-		/* Getting my location */
-		function get_my_location() {
-
-			if (navigator.geolocation) {
-				console.log("not getting in here?");
-				navigator.geolocation.getCurrentPosition(function(position) {
-					console.log("getting my location");
-					my_lat = position.coords.latitude;
-					my_lng = position.coords.longitude;
-					console.log("my location is!");
-					console.log(my_lat, my_lng);
-
-					console.log("calling contact server");
-					contact_server(my_lat, my_lng);
-					// update_map();
-				});
-			} 
-			else {
-				alert("Your browser doesn't support geolocation!");
-			}
-		}
-
-		function contact_server(my_lat, my_lng) {
-			console.log("inside contact_server");
-			/* XML request variables */
-			var request = new XMLHttpRequest();
-			var url = "https://secret-about-box.herokuapp.com/sendLocation";
-			var params = "login="+"JanetGage"+"&lat="+my_lat+"&lng="+my_lng+"&message="+"mymessage";
-			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
-			
-			console.log("requested things");
-			console.log("my_lat", my_lat);
-			console.log("my_lng", my_lng);
-			/* Send proper header information */
-			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			request.setRequestHeader("Content-length", params.length);
-			request.setRequestHeader("Connection", "close");
-
-			request.onreadystatechange = function () {
-				console.log("inside on ready state change fun");
-				if (request.readyState == 4 && request.status == 200) {
-					console.log("inside if statement");
-					var response = request.responseText;
-					console.log("got request???");
-					var parsed_objects = JSON.parse(response);
-					console.log(parsed_objects);
-					console.log("parsed objects!");
-					init_map(parsed_objects);
-					// What do I do with the response?
-				}
-			}
-			request.send(params);
-
-		}
-
-		// function init_map(parsed_objects) {
-		// 	elem = document.getElementById("map");
-
-		// 	for (i = 0; i < parsed_objects.length; i++) {
-	 //    		var id = parsed_objects[i]["_id"];
-	 //    		var login = parsed_objects[i]["login"];
-	 //    		var lat = parsed_objects[i]["lat"];
-	 //    		var lng = parsed_objects[i]["lng"];
-	 //    		var lng = parsed_objects[i]["message"];
-	 //            elem.innerHTML += "<p>" + login + "</p>";
-		// 		}
-		// }
-	
 
 
 		// /* Updating to my location */
@@ -120,26 +172,6 @@
 
 
 
-
-		// 	var content_string = "<div class = 'string_content'>" + "Jade is here!" + "</div>";
-
-		// 	var marker = new google.maps.Marker ({
-		// 		position: me,
-		// 		title: "Hello!"
-		// 	});
-
-		// 	var infowindow = new google.maps.InfoWindow({
-		// 		content: content_string
-		// 	});
-
-		// 	marker.addListener('click', function() {
-  //   			infowindow.open(map, marker);
-  // 			});
-
-		// 	/* Adding marker to map */
-		// 	marker.setMap(map);
-
-		// }
 
 	</script>
 
