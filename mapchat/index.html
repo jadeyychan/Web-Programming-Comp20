@@ -8,11 +8,8 @@
 	<link rel="stylesheet" href="style.css"/>
 	
 	<script>
-		function init() {
-			get_my_location();
-		}
 
-		/* Getting my location */
+		/* Start by getting my location */
 		function get_my_location() {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(position) {
@@ -163,7 +160,7 @@
 
 </head>
 
-<body onload="init()">
+<body onload="get_my_location">
 	<!-- Making the space for the canvas -->
 	<div id="map"></div>
 	</body>
