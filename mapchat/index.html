@@ -8,14 +8,12 @@
 	<link rel="stylesheet" href="style.css"/>
 	
 	<script>
-
 		function init() {
 			get_my_location();
 		}
 
 		/* Getting my location */
 		function get_my_location() {
-
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(position) {
 					my_lat = position.coords.latitude;
@@ -49,11 +47,9 @@
 					var response = request.responseText;
 					var parsed_objects = JSON.parse(response);
 					draw_init_map(parsed_objects, my_lat, my_lng);
-					// What do I do with the response?
 				}
 			}
 			request.send(params);
-
 		}
 
 		function draw_init_map(parsed_objects, my_lat, my_lng) {
@@ -77,13 +73,12 @@
 	    		var lng = parsed_objects[i]["lng"];
 	    		var mess = parsed_objects[i]["message"];
 
+	    		/* Calling function to calculate distance */
 	    		distance(map, my_lat, my_lng, login, lat, lng, mess);
 				}
-
 		}
 
 		function distance(map, my_lat, my_lng, login, lat, lng, mess) {
-			console.log("inside distance!");
 			Number.prototype.toRad = function() {
 			   return this * Math.PI / 180;
 			}
@@ -107,7 +102,9 @@
 
 		function add_marker(map, my_lat, my_lng, login, lat, lng, mess, d) {
     		var pos = new google.maps.LatLng(lat, lng);	
+    		console.log("pos", pos);
     		var my_pos=new google.maps.LatLng(my_lat, my_lng);
+    		console.log("my_pos", my_pos);
 
     		if (pos = my_pos) {
     			console.log("me!");
