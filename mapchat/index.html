@@ -124,7 +124,7 @@
 				   return this * Math.PI / 180;
 				}
 
-				var R = 6371; // km
+				var R = 3959; // earth's radius in miles
 				var x1 = lat-my_lat;
 				var dLat = x1.toRad();
 				var x2 = lng-my_lng;
@@ -136,7 +136,7 @@
 				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 				var d = R * c; 
 				return d;
-			}
+			};
 
 
 			var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
