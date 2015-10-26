@@ -88,12 +88,12 @@
 				title: login
 			});
 
-			var contentstring='<div id = "content">'+"<log>"+"login: "+login+"</log>"
+			var content_string='<div id = "content">'+"<log>"+"login: "+login+"</log>"
 													+"<msg>"+"message: "+mess+"</msg>"
 													+'</div>'
-													
+
 			var infowindow=new google.maps.InfoWindow({
-				content: contentString
+				content: content_string
 			});
 
 			marker.addListener('click', function() {
