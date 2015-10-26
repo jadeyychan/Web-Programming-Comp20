@@ -110,14 +110,7 @@
     		if (d == 0) {
     			console.log("me!");
 
-    			//  var image = 'images/beachflag.png';
-					  // var beachMarker = new google.maps.Marker({
-					  //   position: {lat: -33.890, lng: 151.274},
-					  //   map: map,
-					  //   icon: image
-					  // });
-
-				var image = 'black.png';
+				// var image = 'black.png';
     			var marker=new google.maps.Marker({
     				pos: my_pos,
     				title: login,
@@ -129,6 +122,17 @@
 	    						   "<div id='attr'>"+"Message: "+"</div>"+"<val>"+mess+"</val>"+
 	    						   "<div id='attr'>"+"Distance: "+"</div>"+"<val>"+"This is me!"+"</val>"+
 	    						   "</div>";
+
+	   			var infowindow=new google.maps.InfoWindow({
+					content: content_string
+				});
+
+				marker.addListener('click', function() {
+					infowindow.open(map, marker);
+				});
+
+				/* Adding marker to map */
+				marker.setMap(map);
     		}
 
     		else {
@@ -138,17 +142,14 @@
 					title: login
 				});
 
-
     			d = parseFloat(d).toFixed(4); // rounding miles to 4 digits after decimal
-
 				var content_string='<div id = "content">'+
 	    						   "<div id='attr'>"+"Login: "+"</div>"+"<val>"+login+"</val>"+
 	    						   "<div id='attr'>"+"Message: "+"</div>"+"<val>"+mess+"</val>"+
 	    						   "<div id='attr'>"+"Distance: "+"</div>"+"<val>"+d+" miles"+"</val>"+
 	    						   "</div>";
-    		}
 
-			var infowindow=new google.maps.InfoWindow({
+   			var infowindow=new google.maps.InfoWindow({
 				content: content_string
 			});
 
@@ -158,6 +159,8 @@
 
 			/* Adding marker to map */
 			marker.setMap(map);
+
+    		}
 		}
 
 	</script>
