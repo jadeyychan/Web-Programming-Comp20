@@ -13,10 +13,10 @@ html, body {
 }
 
 #attr {
-	font-weight: 700;
-	color: darkblue;
+	font-style: oblique;
+	color: gray;
 }
 
 #val {
-	color: lightblue;
+	color: darkblue;
 }
