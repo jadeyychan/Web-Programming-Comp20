@@ -7,11 +7,16 @@ html, body {
 #map {
 	height: 100%;
 }
-
-#log {
-	color: red;
+#content {
+	font-family: futura;
+	color: darkblue;
 }
 
-#msg {
-	color: orange;
+#attr {
+	font-weight: 700;
+	color: darkblue;
+}
+
+#val {
+	color: lightblue;
 }

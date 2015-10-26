@@ -115,10 +115,11 @@
     				icon: "arr.png"
     			});
 
-	    		var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
-														+"<div id='msg'>"+"message: "+mess+"</div>"
-														+"<div id='dis'>"+"this is me!"+ "</div>"
-														+'</div>';
+	    		var content_string='<div id = "content">'+
+	    						   "<div id='attr'>"+"Login: "+"</div>"+"<div id='val'>"+login+"</div>"+
+	    						   "<div id='attr'>"+"Message: "+"</div>"+"<div id='val'>"+mess+"</div>"+
+	    						   "<div id='attr'>"+"Distance: "+"</div>"+"<div id='val'>"+"This is me!"+"</div>"+
+	    						   "</div>";
     		}
 
     		else {
@@ -129,11 +130,13 @@
 				});
 
 
-    			d = parseFloat(d).toFixed(4);
-				var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
-														+"<div id='msg'>"+"message: "+mess+"</div>"
-														+"<div id='dis'>"+"distance: "+d+"miles"+"</div>"
-														+'</div>';
+    			d = parseFloat(d).toFixed(4); // rounding miles to 4 digits after decimal
+
+				var content_string='<div id = "content">'+
+	    						   "<div id='attr'>"+"Login: "+"</div>"+"<div id='val'>"+login+"</div>"+
+	    						   "<div id='attr'>"+"Message: "+"</div>"+"<div id='val'>"+mess+"</div>"+
+	    						   "<div id='attr'>"+"Distance: "+"</div>"+"<div id='val'>"+d+"</div>"+
+	    						   "</div>";
     		}
 
 			var infowindow=new google.maps.InfoWindow({
