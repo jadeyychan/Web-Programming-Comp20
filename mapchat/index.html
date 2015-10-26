@@ -14,6 +14,7 @@
 
 			console.log("calling get my location");
 			get_my_location();
+		}
 
 
 
@@ -39,7 +40,6 @@
 			// 	console.log("calling get my location");
 			// 	get_my_location();
 			
-		}
 
 		/* Getting my location */
 		function get_my_location() {
@@ -72,8 +72,8 @@
 			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
 			
 			console.log("requested things");
-			console.log("my_lat" my_lat);
-			console.log("my_lng" my_lng);
+			console.log("my_lat", my_lat);
+			console.log("my_lng", my_lng);
 			/* Send proper header information */
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			request.setRequestHeader("Content-length", params.length);
@@ -92,7 +92,6 @@
 					// What do I do with the response?
 				}
 			}
-
 			request.send(params);
 
 		}
