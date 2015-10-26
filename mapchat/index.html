@@ -54,7 +54,7 @@
 					console.log(my_lat, my_lng);
 
 					console.log("calling contact server");
-					contact_server();
+					contact_server(my_lat, my_lng);
 					// update_map();
 				});
 			} 
@@ -63,14 +63,17 @@
 			}
 		}
 
-		function contact_server() {
-
+		function contact_server(my_lat, my_lng) {
+			console.log("inside contact_server");
 			/* XML request variables */
 			var request = new XMLHttpRequest();
 			var url = "https://secret-about-box.herokuapp.com/sendLocation";
 			var params = "login="+"JanetGage"+"&lat="+mylat+"&lng="+mylng+"&message="+"mymessage";
 			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
 			
+			console.log("requested things");
+			console.log("my_lat" my_lat);
+			console.log("my_lng" my_lng);
 			/* Send proper header information */
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			request.setRequestHeader("Content-length", params.length);
