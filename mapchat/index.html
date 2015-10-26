@@ -102,11 +102,11 @@
 
 		function add_marker(map, my_lat, my_lng, login, lat, lng, mess, d) {
     		var pos = new google.maps.LatLng(lat, lng);	
-    		console.log("mylat", my_lat);
+    		// console.log("mylat", my_lat);
     		var my_pos=new google.maps.LatLng(my_lat, my_lng);
-    		console.log("nolat", lat);
+    		// console.log("nolat", lat);
 
-    		if (pos = my_pos) {
+    		if (pos == my_pos ) {
     			console.log("me!");
     			var marker=new google.maps.Marker({
     				post: my_pos,
