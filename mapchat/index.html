@@ -31,7 +31,7 @@
 		function contact_server(my_lat, my_lng) {
 			
 			var login = "JanetGage";
-			var my_mess = "mymessage";
+			var my_mess = "wooooooo!";
 			
 			/* XML request variables */
 			var request = new XMLHttpRequest();
@@ -76,25 +76,45 @@
 	    		var login = parsed_objects[i]["login"];
 	    		var lat = parsed_objects[i]["lat"];
 	    		var lng = parsed_objects[i]["lng"];
-	    		var pos = new google.maps.LatLng(lat, lng);
 	    		var mess = parsed_objects[i]["message"];
 
-	    		add_marker(map, id, login, pos, mess);
+	    		add_marker(map, my_lat, my_lng, login, lat, lng, mess);
 	            // elem.innerHTML += "<p>" + login + "</p>";
 				}
 
 		}
 
-		function add_marker(map, id, login, pos, mess) {
+		function add_marker(map, my_lat, my_lng, login, lat, lng, mess) {
+    		var pos = new google.maps.LatLng(lat, lng);	
+    		var my_pos=new google.maps.LatLng(my_lat, my_lng);
 
 			var marker=new google.maps.Marker({
 				position: pos,
 				title: login
 			});
 
+			var distance = function() {
+				Number.prototype.toRad = function() {
+				   return this * Math.PI / 180;
+				}
+
+				var R = 6371; // km
+				var x1 = lat - my_lat;
+				var dLat = x1.toRad();
+				var x2 = lng - my_lng;
+				var dLng = x2.toRad();
+
+				var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+			                Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+			                Math.sin(dLng/2) * Math.sin(dLng/2);  
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+				var d = R * c; 
+
+			};
 			var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
 													+"<div id='msg'>"+"message: "+mess+"</div>"
-													+'</div>'
+													+"<div id='dis'>"+"distance: "+d+"</div>"
+													+'</div>';
 
 			var infowindow=new google.maps.InfoWindow({
 				content: content_string
