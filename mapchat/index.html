@@ -77,14 +77,14 @@
 	    		var lng = parsed_objects[i]["lng"];
 	    		var mess = parsed_objects[i]["message"];
 
-	    		distance(my_lat,my_lng, lat, lng);
+	    		distance(map, my_lat, my_lng, login, lat, lng, mess);
 	    		// add_marker(map, my_lat, my_lng, login, lat, lng, mess);
 	            // elem.innerHTML += "<p>" + login + "</p>";
 				}
 
 		}
 
-			function distance(my_lat, my_lng, lat, lng) {
+			function distance(map, my_lat, my_lng, login, lat, lng, mess) {
 				console.log("inside distance!");
 				Number.prototype.toRad = function() {
 				   return this * Math.PI / 180;
