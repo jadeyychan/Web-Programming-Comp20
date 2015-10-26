@@ -29,8 +29,8 @@
 		function contact_server(my_lat, my_lng) {
 			
 			var login = "JanetGage";
-			var my_mess = "wooooooo!";
-			
+			var my_mess = encodeURIComponent("WOOOO!");
+						
 			/* XML request variables */
 			var request = new XMLHttpRequest();
 			var url = "https://secret-about-box.herokuapp.com/sendLocation";
