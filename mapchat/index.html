@@ -77,7 +77,7 @@
 	    		var lng = parsed_objects[i]["lng"];
 	    		var mess = parsed_objects[i]["message"];
 
-	    		distance(map, my_lat, my_lng, login, lat, lng, mess);
+	    		add_marker(map, my_lat, my_lng, login, lat, lng, mess);
 	    		// add_marker(map, my_lat, my_lng, login, lat, lng, mess);
 	            // elem.innerHTML += "<p>" + login + "</p>";
 				}
@@ -107,7 +107,7 @@
 			// }
 
 
-		function add_marker(map, my_lat, my_lng, login, lat, lng, mess, d) {
+		function add_marker(map, my_lat, my_lng, login, lat, lng, mess) {
     		var pos = new google.maps.LatLng(lat, lng);	
     		var my_pos=new google.maps.LatLng(my_lat, my_lng);
 
@@ -117,7 +117,7 @@
 			});
 
 
-			var distance = function distance(map, my_lat, my_lng, login, lat, lng, mess) {
+			var distance = function distance() {
 				console.log("inside distance!");
 				
 				Number.prototype.toRad = function() {
