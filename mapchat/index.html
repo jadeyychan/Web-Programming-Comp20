@@ -57,8 +57,7 @@
 		}
 
 		function draw_init_map(parsed_objects, my_lat, my_lng) {
-			console.log("init_map");
-
+			
 			var me = new google.maps.LatLng(my_lat, my_lng);
 			var map_options = {
 				zoom: 8,
@@ -109,11 +108,13 @@
 			                Math.sin(dLng/2) * Math.sin(dLng/2);  
 				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 				var d = R * c; 
+				console.log(d);
+				return distance;
 
 			};
 			var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
 													+"<div id='msg'>"+"message: "+mess+"</div>"
-													+"<div id='dis'>"+"distance: "+d+"</div>"
+													+"<div id='dis'>"+"distance: "+distance+"</div>"
 													+'</div>';
 
 			var infowindow=new google.maps.InfoWindow({
