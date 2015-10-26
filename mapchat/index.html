@@ -18,7 +18,18 @@
 
 
 			/* Declares my variables and options*/
+			// console.log("inside get_my_location");
+			// var my_lat = 0;
+			// var my_lng = 0;
+			// var me = new google.maps.LatLng(my_lat, my_lng);
+			// var map_options = {
+			// 	zoom: 8,
+			// 	center: me,
+			// 	mapTypeId: google.maps.MapTypeId.ROADMAP
+			// };
 
+			// var map = new google.maps.Map(document.getElementById("map"), map_options);
+			// // 	console.log("calling get my location");
 			// };
 			// var map;
 
@@ -32,18 +43,6 @@
 
 		/* Getting my location */
 		function get_my_location() {
-			console.log("inside get_my_location");
-			var my_lat = 0;
-			var my_lng = 0;
-			var me = new google.maps.LatLng(my_lat, my_lng);
-			var map_options = {
-				zoom: 8,
-				center: me,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-
-			var map = new google.maps.Map(document.getElementById("map"), map_options);
-			// 	console.log("calling get my location");
 
 			if (navigator.geolocation) {
 				console.log("not getting in here?");
@@ -55,7 +54,7 @@
 					console.log(my_lat, my_lng);
 
 					console.log("calling contact server");
-					// contact_server();
+					contact_server();
 					// update_map();
 				});
 			} 
