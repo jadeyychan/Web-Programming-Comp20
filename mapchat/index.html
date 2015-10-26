@@ -110,6 +110,7 @@
     		var my_pos=new google.maps.LatLng(my_lat, my_lng);
 
     		if (pos = my_pos) {
+    			console.log("me!");
     			var marker=new google.maps.Marker({
     				post: my_pos,
     				title: login,
@@ -123,6 +124,7 @@
     		}
 
     		else {
+    			console.log("not me!");
     			var marker=new google.maps.Marker({
 					position: pos,
 					title: login
