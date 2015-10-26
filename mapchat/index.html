@@ -109,15 +109,30 @@
     		var pos = new google.maps.LatLng(lat, lng);	
     		var my_pos=new google.maps.LatLng(my_lat, my_lng);
 
-			var marker=new google.maps.Marker({
-				position: pos,
-				title: login
-			});
+    		if (pos = my_pos) {
+    			var marker=new google.maps.Marker({
+    				post: my_pos,
+    				title: login,
+    				icon: arr.png
+    			});
 
-			var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
-													+"<div id='msg'>"+"message: "+mess+"</div>"
-													+"<div id='dis'>"+"distance: "+d+"</div>"
-													+'</div>';
+	    		var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
+														+"<div id='msg'>"+"message: "+mess+"</div>"
+														+"<div id='dis'>"+"this is me!"+ "</div>"
+														+'</div>';
+    		}
+
+    		else {
+    			var marker=new google.maps.Marker({
+					position: pos,
+					title: login
+				});
+
+				var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
+														+"<div id='msg'>"+"message: "+mess+"</div>"
+														+"<div id='dis'>"+"distance: "+d+"miles"+"</div>"
+														+'</div>';
+    		}
 
 			var infowindow=new google.maps.InfoWindow({
 				content: content_string
