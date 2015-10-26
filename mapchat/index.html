@@ -103,12 +103,9 @@
 		function add_marker(map, my_lat, my_lng, login, lat, lng, mess, d) {
     		
     		var pos = new google.maps.LatLng(lat, lng);	
-    		// console.log("mylat", my_lat);
     		var my_pos=new google.maps.LatLng(my_lat, my_lng);
-    		// console.log("nolat", lat);
 
     		if (d == 0) {
-    			console.log("me!");
 
 				var image = 'arr.png';
     			var marker=new google.maps.Marker({
@@ -136,7 +133,6 @@
     		}
 
     		else {
-    			console.log("not me!");
     			var marker=new google.maps.Marker({
 					position: pos,
 					title: login
