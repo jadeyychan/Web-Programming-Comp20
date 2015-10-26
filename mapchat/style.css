@@ -7,3 +7,11 @@ html, body {
 #map {
 	height: 100%;
 }
+
+log {
+	color: red;
+}
+
+mes {
+	color: orange;
+}
