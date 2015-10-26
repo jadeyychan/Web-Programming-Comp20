@@ -8,10 +8,10 @@ html, body {
 	height: 100%;
 }
 
-log {
+#log {
 	color: red;
 }
 
-mes {
+#msg {
 	color: orange;
 }

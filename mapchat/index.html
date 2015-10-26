@@ -29,10 +29,14 @@
 		}
 
 		function contact_server(my_lat, my_lng) {
+			
+			var login = "JanetGate";
+			var my_mess = "Yellooooo!";
+			
 			/* XML request variables */
 			var request = new XMLHttpRequest();
 			var url = "https://secret-about-box.herokuapp.com/sendLocation";
-			var params = "login="+"JanetGage"+"&lat="+my_lat+"&lng="+my_lng+"&message="+"mymessage";
+			var params = "login="+login+"&lat="+my_lat+"&lng="+my_lng+"&message="+my_mess;
 			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
 			
 			/* Send proper header information */
@@ -88,8 +92,8 @@
 				title: login
 			});
 
-			var content_string='<div id = "content">'+"<log>"+"login: "+login+"</log>"
-													+"<msg>"+"message: "+mess+"</msg>"
+			var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
+													+"<div id='msg'>"+"message: "+mess+"</div>"
 													+'</div>'
 
 			var infowindow=new google.maps.InfoWindow({
