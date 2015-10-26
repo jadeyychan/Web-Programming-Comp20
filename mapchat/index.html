@@ -120,6 +120,17 @@
 	    						   "<div id='attr'>"+"Message: "+"</div>"+"<val>"+mess+"</val>"+
 	    						   "<div id='attr'>"+"Distance: "+"</div>"+"<val>"+"This is me!"+"</val>"+
 	    						   "</div>";
+
+	   			var infowindow=new google.maps.InfoWindow({
+					content: content_string
+				});
+
+				marker.addListener('click', function() {
+					infowindow.open(map, marker);
+				});
+
+				/* Adding marker to map */
+				marker.setMap(map);
     		}
 
     		else {
@@ -137,18 +148,19 @@
 	    						   "<div id='attr'>"+"Message: "+"</div>"+"<val>"+mess+"</val>"+
 	    						   "<div id='attr'>"+"Distance: "+"</div>"+"<val>"+d+" miles"+"</val>"+
 	    						   "</div>";
+
+   	   			var infowindow=new google.maps.InfoWindow({
+					content: content_string
+				});
+
+				marker.addListener('click', function() {
+					infowindow.open(map, marker);
+				});
+
+				/* Adding marker to map */
+				marker.setMap(map);
     		}
 
-			var infowindow=new google.maps.InfoWindow({
-				content: content_string
-			});
-
-			marker.addListener('click', function() {
-				infowindow.open(map, marker);
-			});
-
-			/* Adding marker to map */
-			marker.setMap(map);
 		}
 
 	</script>
