@@ -12,11 +12,70 @@
 		function init() {
 			console.log("inside init function");
 
+			console.log("calling get my location");
+			get_my_location();
+
+
+
+			/* Declares my variables and options*/
+
+			// };
+			// var map;
+
+			//  Draws map according to specifications 
+			// // function initMap() {
+			// 	map = new google.maps.Map(document.getElementById("map"), map_options);
+			// 	console.log("calling get my location");
+			// 	get_my_location();
+			
+		}
+
+		/* Getting my location */
+		function get_my_location() {
+			console.log("inside get_my_location");
+			var my_lat = 0;
+			var my_lng = 0;
+			var me = new google.maps.LatLng(my_lat, my_lng);
+			var map_options = {
+				zoom: 8,
+				center: me,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+
+			var map = new google.maps.Map(document.getElementById("map"), map_options);
+			// 	console.log("calling get my location");
+
+			if (navigator.geolocation) {
+				console.log("not getting in here?");
+				navigator.geolocation.getCurrentPosition(function(position) {
+					console.log("getting my location");
+					my_lat = position.coords.latitude;
+					my_lng = position.coords.longitude;
+					console.log("my location is!");
+					console.log(my_lat, my_lng);
+
+					console.log("calling contact server");
+					// contact_server();
+					// update_map();
+				});
+			} 
+			else {
+				alert("Your browser doesn't support geolocation!");
+			}
+		}
+
+		function contact_server() {
+
 			/* XML request variables */
 			var request = new XMLHttpRequest();
-			console.log("got request var");
 			var url = "https://secret-about-box.herokuapp.com/sendLocation";
-			console.log("set url var");
+			var params = "login="+"JanetGage"+"&lat="+mylat+"&lng="+mylng+"&message="+"mymessage";
+			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
+			
+			/* Send proper header information */
+			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			request.setRequestHeader("Content-length", params.length);
+			request.setRequestHeader("Connection", "close");
 
 			request.onreadystatechange = function () {
 				console.log("inside on ready state change fun");
@@ -32,60 +91,24 @@
 				}
 			}
 
-			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
-			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			request.send("the endcoded thing");
+			request.send(params);
 
 		}
 
-		function init_map(parsed_objects) {
-			console.log("inside init_map!");
-			elem = document.getElementById("map");
-			console.log("assigned elem");
-			console.log(elem);
+		// function init_map(parsed_objects) {
+		// 	elem = document.getElementById("map");
 
-			console.log("about to go into for loop");
-			for (i = 0; i < parsed_objects.length; i++) {
-				console.log("inside for loop!");
-	    		var id = parsed_objects[i]["_id"];
-	    		var login = parsed_objects[i]["login"];
-	    		var lat = parsed_objects[i]["lat"];
-	    		var lng = parsed_objects[i]["lng"];
-	    		var lng = parsed_objects[i]["message"];
-	            elem.innerHTML += "<p>" + login + "</p>";
-				}
-		}
-		
-		// /* Declares my variables and options*/
-		// var my_lat = 0;
-		// var my_lng = 0;
-		// var me = new google.maps.LatLng(my_lat, my_lng);
-		// var map_options = {
-		// 	zoom: 8,
-		// 	center: me,
-		// 	mapTypeId: google.maps.MapTypeId.ROADMAP
-		// };
-		// var map;
-
-		// /* Draws map according to specifications */
-		// function initMap() {
-		// 	map = new google.maps.Map(document.getElementById("map"), map_options);
-		// 	get_my_location();
+		// 	for (i = 0; i < parsed_objects.length; i++) {
+	 //    		var id = parsed_objects[i]["_id"];
+	 //    		var login = parsed_objects[i]["login"];
+	 //    		var lat = parsed_objects[i]["lat"];
+	 //    		var lng = parsed_objects[i]["lng"];
+	 //    		var lng = parsed_objects[i]["message"];
+	 //            elem.innerHTML += "<p>" + login + "</p>";
+		// 		}
 		// }
+	
 
-		// /* Getting my location */
-		// function get_my_location() {
-		// 	if (navigator.geolocation) {
-		// 		navigator.geolocation.getCurrentPosition(function(position) {
-		// 			my_lat = position.coords.latitude;
-		// 			my_lng = position.coords.longitude;
-		// 			update_map();
-		// 		});
-		// 	} 
-		// 	else {
-		// 		alert("Your browser doesn't support geolocation!");
-		// 	}
-		// }
 
 		// /* Updating to my location */
 		// function update_map() {
@@ -126,8 +149,5 @@
 	<!-- Making the space for the canvas -->
 	<div id="map"></div>
 	</body>
-
-
-
 
 </html>
