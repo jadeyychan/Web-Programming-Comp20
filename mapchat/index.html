@@ -101,12 +101,13 @@
 
 
 		function add_marker(map, my_lat, my_lng, login, lat, lng, mess, d) {
+    		
     		var pos = new google.maps.LatLng(lat, lng);	
     		// console.log("mylat", my_lat);
     		var my_pos=new google.maps.LatLng(my_lat, my_lng);
     		// console.log("nolat", lat);
 
-    		if (pos == my_pos ) {
+    		if (d == 0) {
     			console.log("me!");
     			var marker=new google.maps.Marker({
     				post: my_pos,
@@ -127,6 +128,8 @@
 					title: login
 				});
 
+
+    			// d = parseFloat(d).toFixed(4);
 				var content_string='<div id = "content">'+"<div id='log'>"+"login: "+login+"</div>"
 														+"<div id='msg'>"+"message: "+mess+"</div>"
 														+"<div id='dis'>"+"distance: "+d+"miles"+"</div>"
