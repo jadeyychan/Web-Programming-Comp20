@@ -23,33 +23,31 @@
 			}
 		}
 
-		function contact_server(my_lat, my_lng) {
+		function contact_server() {
 			
-			var login = "JanetGage";
+			var my_login = "JanetGage";
 			var my_mess = encodeURIComponent("WOOOO!");
 
 			/* XML request variables */
 			var request = new XMLHttpRequest();
 			var url = "https://secret-about-box.herokuapp.com/sendLocation";
-			var params = "login="+login+"&lat="+my_lat+"&lng="+my_lng+"&message="+my_mess;
+			var params = "login="+my_login+"&lat="+my_lat+"&lng="+my_lng+"&message="+my_mess;
 			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
 			
 			/* Send proper header information */
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			// request.setRequestHeader("Content-length", params.length);
-			// request.setRequestHeader("Connection", "close");
 
 			request.onreadystatechange = function () {
 				if (request.readyState == 4 && request.status == 200) {
 					var response = request.responseText;
 					var parsed_objects = JSON.parse(response);
-					draw_init_map(parsed_objects, my_lat, my_lng);
+					draw_init_map(parsed_objects, my_login);
 				}
 			}
 			request.send(params);
 		}
 
-		function draw_init_map(parsed_objects, my_lat, my_lng) {
+		function draw_init_map(parsed_objects, my_login) {
 			
 			var me = new google.maps.LatLng(my_lat, my_lng);
 			var map_options = {
@@ -71,11 +69,11 @@
 	    		var mess = parsed_objects[i]["message"];
 
 	    		/* Calling function to calculate distance */
-	    		distance(map, my_lat, my_lng, login, lat, lng, mess);
+	    		distance(map, login, lat, lng, mess, my_login, login);
 				}
 		}
 
-		function distance(map, my_lat, my_lng, login, lat, lng, mess) {
+		function distance(map, login, lat, lng, mess, my_login, login) {
 			Number.prototype.toRad = function() {
 			   return this * Math.PI / 180;
 			}
@@ -92,17 +90,17 @@
 			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 			var d = R * c; 
 			
-			add_marker(map, my_lat, my_lng, login, lat, lng, mess, d);
+			add_marker(map, lat, lng, mess, d, my_login, login);
 
 		}
 
 
-		function add_marker(map, my_lat, my_lng, login, lat, lng, mess, d) {
+		function add_marker(map, lat, lng, mess, d, my_login, login) {
     		
     		var pos = new google.maps.LatLng(lat, lng);	
     		var my_pos=new google.maps.LatLng(my_lat, my_lng);
 
-    		if (d == 0) {
+    		if (my_login == login ) { //  check login
 				var image = 'arrow.png';
     			var marker=new google.maps.Marker({
     				position: my_pos,
@@ -156,8 +154,6 @@
 		}
 
 	</script>
-
-
 </head>
 
 <body onload="get_my_location()">
