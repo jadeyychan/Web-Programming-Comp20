@@ -1,22 +1,11 @@
-// $(document).ready(function() {
-
-// 	$("input").on("change", function() {
-// 		var message = ($(this).val());
-// 		$("#log").prepend("<div>"+message+"</div>");
-// 	});
-// });	
-
-
 $(document).ready(function() {
 
-	$("input").keypress(function (e) {
-		if (e.which == 13) {
-			var message = ($(this).val());
-			$("#log").prepend("<div>"+message+"</div>");
-		}
+	$("input").on("change", function() {
+		var message = ($(this).val());
+		$("#log").prepend("<div>"+message+"</div>");
+		$(this).val(""); // resetting the input field to empty
 	});
 });	
-
 
 
 
