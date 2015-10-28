@@ -1,10 +1,22 @@
+// $(document).ready(function() {
+
+// 	$("input").on("change", function() {
+// 		var message = ($(this).val());
+// 		$("#log").prepend("<div>"+message+"</div>");
+// 	});
+// });	
+
+
 $(document).ready(function() {
 
-	$("input").on("change", function() {
-		var message = ($(this).val());
-		$("#log").prepend("<div>"+message+"</div>");
+	$("input").keypress(function (e) {
+		if (e.which == 13) {
+			var message = ($(this).val());
+			$("#log").prepend("<div>"+message+"</div>");
+		}
 	});
 });	
+
 
 
 
