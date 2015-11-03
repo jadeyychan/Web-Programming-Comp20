@@ -1,11 +1,25 @@
 $(document).ready(function() {
+	var storage = localStorage.getItem("prevEntries");
+	$("#log").append(storage);
 
 	$("input").on("change", function() {
+
 		var message = ($(this).val());
 		var timestamp = new Date();
-		var entry = timestamp+" - "+message;
+		var entry = "<div>" + timestamp+" - "+message + "</div>";
 
-		$("#log").prepend("<div>"+entry+"</div>");
+		$("#log").append(entry);
+
+		if (storage == null) {
+			storage = entry;
+		} else {
+			storage = storage + entry;
+		}
+
+		localStorage.setItem('prevEntries', storage);
 		$(this).val(""); // resetting the input field to empty
 	});
+
 });	
+
+
