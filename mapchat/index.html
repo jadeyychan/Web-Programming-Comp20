@@ -15,7 +15,7 @@
 				navigator.geolocation.getCurrentPosition(function(position) {
 					my_lat = position.coords.latitude;
 					my_lng = position.coords.longitude;
-					contact_server(my_lat, my_lng);
+					contact_server();
 				});
 			} 
 			else {
