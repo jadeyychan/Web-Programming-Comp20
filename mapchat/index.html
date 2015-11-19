@@ -15,7 +15,7 @@
 				navigator.geolocation.getCurrentPosition(function(position) {
 					my_lat = position.coords.latitude;
 					my_lng = position.coords.longitude;
-					contact_server(my_lat, my_lng);
+					contact_server();
 				});
 			} 
 			else {
@@ -30,9 +30,9 @@
 
 			/* XML request variables */
 			var request = new XMLHttpRequest();
-			var url = "https://secret-about-box.herokuapp.com/sendLocation";
+			var url = "https://murmuring-sands-9462.herokuapp.com/sendLocation";
 			var params = "login="+my_login+"&lat="+my_lat+"&lng="+my_lng+"&message="+my_mess;
-			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
+			request.open('POST', url, true); 
 			
 			/* Send proper header information */
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -74,31 +74,29 @@
 		}
 
 		function distance(map, login, lat, lng, mess, my_login, login) {
-			Number.prototype.toRad = function() {
-			   return this * Math.PI / 180;
+			function toRad(x) {
+			   return x * Math.PI / 180;
 			}
 
 			var R = 6371; // km
 			var x1 = lat-my_lat;
-			var dLat = x1.toRad();
+			var dLat = toRad(x1);
 			var x2 = lng-my_lng;
-			var dLng = x2.toRad();
+			var dLng = toRad(x2);
 
 			var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
-		                Math.cos(my_lat.toRad()) * Math.cos(lat.toRad()) * 
+		                Math.cos(toRad(my_lat)) * Math.cos(toRad(lat)) * 
 		                Math.sin(dLng/2) * Math.sin(dLng/2);  
 			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 			var d = R * c; 
 			
 			add_marker(map, lat, lng, mess, d, my_login, login);
-
 		}
-
 
 		function add_marker(map, lat, lng, mess, d, my_login, login) {
     		
     		var pos = new google.maps.LatLng(lat, lng);	
-    		var my_pos=new google.maps.LatLng(my_lat, my_lng);
+    		var my_pos = new google.maps.LatLng(my_lat, my_lng);
 
     		if (my_login == login ) { //  check login
 				var image = 'arrow.png';
@@ -114,9 +112,8 @@
 	    						   "<div id='attr'>"+"Distance: "+"</div>"+"<val>"+"This is me!"+"</val>"+
 	    						   "</div>";
     		}
-
     		else {
-    			var marker=new google.maps.Marker({
+    			var marker = new google.maps.Marker({
 					position: pos,
 					title: login
 				});
