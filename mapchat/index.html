@@ -30,9 +30,9 @@
 
 			/* XML request variables */
 			var request = new XMLHttpRequest();
-			var url = "https://secret-about-box.herokuapp.com/sendLocation";
+			var url = "https://murmuring-sands-9462.herokuapp.com/sendLocation";
 			var params = "login="+my_login+"&lat="+my_lat+"&lng="+my_lng+"&message="+my_mess;
-			request.open('POST', 'https://secret-about-box.herokuapp.com/sendLocation', true); 
+			request.open('POST', url, true); 
 			
 			/* Send proper header information */
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
