@@ -74,18 +74,19 @@
 		}
 
 		function distance(map, login, lat, lng, mess, my_login, login) {
-			Number.prototype.toRad = function() {
-			   return this * Math.PI / 180;
+			function toRad(x) {
+			   return x * Math.PI / 180;
 			}
 
 			var R = 6371; // km
 			var x1 = lat-my_lat;
-			var dLat = x1.toRad();
+			var dLat = toRad(x1);
 			var x2 = lng-my_lng;
-			var dLng = x2.toRad();
+			var dLng = toRad(x2);
+			console.log("lat is", lat);
 
 			var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
-		                Math.cos(my_lat.toRad()) * Math.cos(lat.toRad()) * 
+		                Math.cos(toRad(my_lat)) * Math.cos(toRad(lat)) * 
 		                Math.sin(dLng/2) * Math.sin(dLng/2);  
 			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 			var d = R * c; 
@@ -93,7 +94,6 @@
 			add_marker(map, lat, lng, mess, d, my_login, login);
 
 		}
-
 
 		function add_marker(map, lat, lng, mess, d, my_login, login) {
     		
