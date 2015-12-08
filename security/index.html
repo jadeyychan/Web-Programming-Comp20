@@ -2,11 +2,64 @@
 <html>
 <head>
 	<title> Security: Homework 4 </title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 
 
 <body>
-	more coming!
+	<h1> Homework #4 - Security Assessment of Mapchat </h1>
+	Jade Chan
+
+	<h2> Introduction </h2>
+	This assessment tests the security of Mapchat, developed by Deanna Bessy. This includes both the client-side (assignment 2), and the server-side (homework 3) developed by Deanna Bessy. 
+
+	According to the specifications	she followed from her client, the client-side of MapChat must send her current location and other information to a datastore. It must also then retrieve and display all of the information recieved. 
+
+	The server side has three requirements. Firstly, it must fulfill a POST request: when an approved check-in request is submitted, the server will return a JSON string with all of the stored data. Secondly, the server must fulfill a GET request that parses a query and returns the last known location of a login as a JSON string. And lastly, the MapChat server must display a list of information for all the logins. 
+
+	This document will identify the vulnerabilities in the server. 
+	
+	<h2> Methodology </h2>
+	Describe your methodology pen testing the application, including the tools that you used
+
+	<h2> Abstract of Findings </h2>
+	Provide an overview of all the security and privacy issues you identified. This section should be written for non-technical managers who do not have technical expertise and do not have time to read the entire document. Write this section using lay language
+
+	<h2> Issues Found </h2>
+
+	<p> 1. Script injection (Back-end) </p>
+	<ul>
+		<li> Through injection, I was able to insert malicious code into the webpage. This was done through the POST request, in /sendLocation. I sent several harmful lines of code through the message field by wrapping it inside of a < script > tag. 
+		</li>
+		<li> Inserting an image into the list </li>
+		<li> Alerting the user </li>
+		<li> Redirecting the page </li>
+		<li> Severity of the issue: HIGH. This is an extremely dangerous vulnerability, since hackers are basically capable of injecting any code into server,  </li>
+		<li> Resolution: Test the message string for </li>
+	</ul>
+
+	2. Style injection (Front-end)
+
+	3. Flooding server
+
+
+	4. General authentication
+
+
+	For each issue that you find, document:
+	Issue (e.g., database injection, really bad programming practice)
+	Location / page where issue was found
+	Severity of issue (e.g., low, medium , or high). Justify your answer.
+	Description of issue. How did you find it? A screenshot of problem is excellent.
+	Proof of vulnerability. Screenshots are ideal.
+	Resolution. How did you resolve the issue? Show code if possible.
+
+
+	<h2> Conclusion </h2>
+	Conclusion - You can also list future considerations and recommendations with costs.
+
+
 </body>
 
 
