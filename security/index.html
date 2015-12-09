@@ -111,35 +111,39 @@
 		<li> Location: </li>
 			<p> /latest.json </p>
 		<li> Description: </li>
-			<p>  </p>
-		<li> How to execute </li>
+			<p> ?????? </p>
+		<li> Execution </li>
 			<p> The command </p>
 			<img src="img/query_code.png"> 
 			<p> When a GET request is made with the login={$ne}approvedlogin, the server does not correctly parse the data and return a JSON object that is not approvedlogin. Instead, the server returns a 503 error, and pauses. </p>
 			<img src="img/query_display.png">
 			<p> And using Postman, we can see that a 503 internal server error occurred </p>
 			<img src="img/query_postman.png">
-		<li> Severity of the issue: LOW <li>
-			<p> While </p>
+		<li> Severity of the issue: HIGH <li>
+			<p> Putting {$ne} in the query parameters crashed the app, and it did not restart. </p>
 		<li> Improvements </li>
+			<p> ???? </p>
 	</ul>
 
 
-	<h3> 5. General authentication issues </h3>
-
-
-	For each issue that you find, document:
-	Issue (e.g., database injection, really bad programming practice)
-	Location / page where issue was found
-	Severity of issue (e.g., low, medium , or high). Justify your answer.
-	Description of issue. How did you find it? A screenshot of problem is excellent.
-	Proof of vulnerability. Screenshots are ideal.
-	Resolution. How did you resolve the issue? Show code if possible.
-
+	<h3> 5. Authentication </h3>
+	<ul>
+		<li> Location: </li>
+			<p> /sendLocation. A list of all of the approved logins exist on the same page, and this is a vulnerability. </p>
+		<li> Description </li>
+			<p> Although there is a list of approved logins, there is no authentication on the website application. Anyone can claim to be one of those approved logins.  </p>
+		<li> Execution </li>
+			<p> The command </p>
+				<img src="img/impersonation_code.png">
+			<p> Here, I am simply stating that my login is mchow, and I am impersonating him. </p>
+		<li> Severity of the issue: HIGH </li>
+			<p> Since none of the login information can be validated, essentially all of the logs cannot be trusted as anyone could have claimed to be anyone else. </p>
+		<li> Improvements </li>
+			<p> The list of approved logins should be moved to a separate file, and not stored in the same file as the server. In addition, implementing some form of authentication to check that the user is the login name, such as facebook or google API. </p>
+	</ul>
 
 	<h2> Conclusion </h2>
-	<p> The current issues with MapChat makes it basically inoperable. The recommendations I've suggested will significantly reduce the site's vulnerabilites to basic attacks. The simple changes include sanitization of data, and a greater database capacity. However, a greater structural problem exists in that anyone with an approved login, or claims to have an approved login, can submit to any other login, basically rendering all of the data listed untrustworthy. 
-	</p>
-
+		<p> The current issues with MapChat makes it basically inoperable. The recommendations I've suggested will significantly reduce the site's vulnerabilites to basic attacks. The simple changes include sanitization of data, and a greater database capacity. However, a greater structural problem exists in that anyone with an approved login, or claims to have an approved login, can submit to any other login, basically rendering all of the data listed untrustworthy. 
+		</p>
 </body>
 </html>
