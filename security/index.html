@@ -12,39 +12,120 @@
 	Jade Chan
 
 	<h2> Introduction </h2>
-	This assessment tests the security of Mapchat, developed by Deanna Bessy. This includes both the client-side (assignment 2), and the server-side (homework 3) developed by Deanna Bessy. 
+	<p> This assessment tests the security of Mapchat and identifies security vulnerabilites. This includes both the client-side (assignment 2), and the server(homework 3), developed by Deanna Bessy. </p>
 
-	According to the specifications	she followed from her client, the client-side of MapChat must send her current location and other information to a datastore. It must also then retrieve and display all of the information recieved. 
+	<p> According to the specifications	she followed from her client, the client-side of MapChat must send current location and other information to a datastore. It must also then retrieve and display all of the information recieved. </p>
 
-	The server side has three requirements. Firstly, it must fulfill a POST request: when an approved check-in request is submitted, the server will return a JSON string with all of the stored data. Secondly, the server must fulfill a GET request that parses a query and returns the last known location of a login as a JSON string. And lastly, the MapChat server must display a list of information for all the logins. 
+	<p> The server side has three requirements. Firstly, it must fulfill a POST request. When an approved check-in request is submitted, the server will return a JSON string with all of the stored data. Secondly, the server must fulfill a GET request that parses a query and returns the last known location of a login as a JSON string. And lastly, the MapChat server must display a list of information for all the logins. </p>
 
-	This document will identify the vulnerabilities in the server. 
+	<p> This document will identify the vulnerabilities in the server. </p>
 	
 	<h2> Methodology </h2>
-	Describe your methodology pen testing the application, including the tools that you used
+
+	<p> Testing was first carried out in a "black-box" manner, using just would be available to an attacker. I used mostly simple tools, such as the curl command on terminal, and a bash script (more details below). Multiple vulnerabilities were found this way. </p>
+
+	<p> I then reviewed Deanna's source code to find more logic errors and opportunities for exploitation.</p>
 
 	<h2> Abstract of Findings </h2>
-	Provide an overview of all the security and privacy issues you identified. This section should be written for non-technical managers who do not have technical expertise and do not have time to read the entire document. Write this section using lay language
+	<p> The vulnerabilities in this application stem from three major areas.</p>
+
+	<p> The first, and perhaps the greatest, is that this application trusts the user's input data. It assumes the input data is correct, but never asserts that correctness. The data is never sanitized or checked for malicious content. Instead, it is directly submitted into the database, and as a result, harmful and undesireable effects occur. </p>
+
+	<p> A second vulnerability exists in that the database's capacity has a limit. Since we are not paying for mongodb, it can only hold 500MB of data. An attacker could easily fill that quota, and once again, harmful and undesireable effects occur. </p>
+
+	<p> Finally, although not technically a hacking vulnerably, but instead rather a design flaw, this application offers no method of authentication. Although it checks that the login username is an "approved one," any hacker could impersonate any other approved login. 
+	</p>
 
 	<h2> Issues Found </h2>
 
-	<p> 1. Script injection (Back-end) </p>
+	<h3> 1. Cross-Site Scripting (XSS) + Injection </h3>
 	<ul>
-		<li> Through injection, I was able to insert malicious code into the webpage. This was done through the POST request, in /sendLocation. I sent several harmful lines of code through the message field by wrapping it inside of a < script > tag. 
-		</li>
-		<li> Inserting an image into the list </li>
-		<li> Alerting the user </li>
-		<li> Redirecting the page </li>
-		<li> Severity of the issue: HIGH. This is an extremely dangerous vulnerability, since hackers are basically capable of injecting any code into server,  </li>
-		<li> Resolution: Test the message string for </li>
+		<li> Location: </li>
+			<p> /sendLocation </p>
+		<li> Description: </li>
+			<p> 
+				Through injection, I was able to insert malicious code into the webpage. This was done through the POST request, in /sendLocation. I sent several harmful lines of code through the message field by wrapping it inside of a < script > tag. 
+			</p>	
+
+		<li> Execution </li>
+			<p> Sending an alert </p>
+				<p1> The command used: </p1>
+					<img src="img/alert_code.png">
+				<p1> Here, we injected an window.alert() into to script tag, and this runs everytime the page is reloaded. </p1>
+					<img src= "img/alert_img.png"> 
+			<p> Redirecting the page </p>
+				<p1> The command used: </p1>
+					<img src="img/redirect_code.png">
+				<p1> In this hack, we injected an window.location="website_link_here", and again, this will run everytime the page is loaded, and will redirect to whatever the link is. Here, it will redirect to Taylor Swift's "Blank Space" music video. </p1>
+					<img src="img/redirect_img.png">
+		<li> Severity of the issue: HIGH <li>
+			<p> This is an extremely dangerous vulnerability. Since hackers are capable of injecting any code into the website, they are essentially capable of breaking the website in a plethora of ways. </p>
+		<li> Improvements </li>
+			<p> Sanitize the data. After reading the message string, and before inputting the document into the collection, test the strings for characters such as "<" and ">", and convert them to {$gt} and {$lt}. Extra testing could include testing for the word "script." </p>
 	</ul>
 
-	2. Style injection (Front-end)
+	<h3> 2. Cross-Site Scripting (XSS) + Injection (Styling) </h3>
+	<ul> 
+		<li> Location: </li>
+			<p> /sendLocation </p>
+		<li> Description </li>
+			<p> Similar to issue #1, this vulnerability arises from inputting harmful code into the database. Instead of injecting the < script > tag, wrap the message in a < style > tag and therefore we can alter the webpage's visibility. </p>
+		<li> Execution </li>
+			<p> Hiding the body of the page </p>
+				<p1> The command used: </p1>
+					<img src="img/style_code.png">
+				<p1> In this hack, we change the display of the body to none, effectively showing a blank screen. </p1>
+					<img src="img/style_img.png">
+		<li> Severity of issue: MODERATE </li>
+			<p> Though this attack does input malicious code into the server, it only affects the viewability of the website. If the user has knowledge of basic HTML and developer tools, the user can uncheck the harmful style element and the results would be visible again. However, without this knowledge, the website is basically useless, as its visibility is obstructed. </p>
+			<img src="img/style_hide.png">
+			<img src="img/style_show.png">
+		<li> Improvements </li>
+			<p> Similar to the issue above, an easy fix for this issue is to sanitize the data. Check for "<" and ">" characters, and conver them to {$gt} and {$lt}. Extra testing could include testing for the word "style."</p>
+	</ul>
 
-	3. Flooding server
+	<h3> 3. Flooding the Database </h3>
+	<ul>
+		<li> Location: </li>
+			<p> /sendLocation </p>
+		<li> Description </li>
+			<p> Assuming that the mongodb database is not under a paid plan, only 500MB of storage is allowed. This hack will flood the database with results, causing it to either crash, or bill the owner of the server, of which both are undesireable results.</p>
+		<li> Execution </li>
+			<p> Manually injecting 500MB worth of data is simply not feasible. Instead, I have written a simple bash script that will add to the database infinitely. </p>
+			<p> The command </p>
+				<img src="img/curl_code.png">
+
+				<p1> While the code is running: </p1>
+				<img src="img/curl_terminal.png">
+
+				<p1> We can see that it is filling up the results: </p1>
+				<img src="img/curl_display.png">
+		<li> Severity of issue: HIGH </li>
+				<p> This is a very dangerous vulnerability as the entire server could crash as a result of the database being full. </p>
+		<li> Improvements </li>
+				<p> The server can have a few more checks that reject numerous data insertions from the same user one after another. </p>
+	</ul>
+
+	<h3> 4. Query Parameters </h3>
+	<ul>
+		<li> Location: </li>
+			<p> /latest.json </p>
+		<li> Description: </li>
+			<p>  </p>
+		<li> How to execute </li>
+			<p> The command </p>
+			<img src="img/query_code.png"> 
+			<p> When a GET request is made with the login={$ne}approvedlogin, the server does not correctly parse the data and return a JSON object that is not approvedlogin. Instead, the server returns a 503 error, and pauses. </p>
+			<img src="img/query_display.png">
+			<p> And using Postman, we can see that a 503 internal server error occurred </p>
+			<img src="img/query_postman.png">
+		<li> Severity of the issue: LOW <li>
+			<p> While </p>
+		<li> Improvements </li>
+	</ul>
 
 
-	4. General authentication
+	<h3> 5. General authentication issues </h3>
 
 
 	For each issue that you find, document:
@@ -57,10 +138,8 @@
 
 
 	<h2> Conclusion </h2>
-	Conclusion - You can also list future considerations and recommendations with costs.
-
+	<p> The current issues with MapChat makes it basically inoperable. The recommendations I've suggested will significantly reduce the site's vulnerabilites to basic attacks. The simple changes include sanitization of data, and a greater database capacity. However, a greater structural problem exists in that anyone with an approved login, or claims to have an approved login, can submit to any other login, basically rendering all of the data listed untrustworthy. 
+	</p>
 
 </body>
-
-
 </html>
