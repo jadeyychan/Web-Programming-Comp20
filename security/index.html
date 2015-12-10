@@ -12,7 +12,7 @@
 	Jade Chan
 
 	<h2> Introduction </h2>
-	<p> This assessment tests the security of Mapchat and identifies security vulnerabilites. This includes both the client-side (assignment 2), and the server(homework 3), developed by Deanna Bessy. </p>
+	<p> This assessment tests the security of Mapchat and identifies security vulnerabilites. This includes both the client-side (assignment 2), and the server (homework 3), developed by Deanna Bessy. </p>
 
 	<p> According to the specifications	she followed from her client, the client-side of MapChat must send current location and other information to a datastore. It must also then retrieve and display all of the information recieved. </p>
 
@@ -40,110 +40,191 @@
 
 	<h3> 1. Cross-Site Scripting (XSS) </h3>
 	<ul>
-		<li> Location: </li>
-			<p> /sendLocation </p>
-		<li> Description: </li>
-			<p> 
+		<li> 
+			<subtitle> Location: </subtitle> <subtitleItem> /sendLocation </subtitleItem> 
+		</li>
+			
+		<li> 
+			<subtitle> Description: </subtitle> 
+				<subtitleItem> 
 				Through injection, I was able to insert malicious code into the webpage. This was done through the POST request, in /sendLocation. I sent several harmful lines of code through the message field by wrapping it inside of a < script > tag. 
-			</p>	
-
-		<li> Execution </li>
-			<p> Sending an alert </p>
+				</subtitleItem>
+		</li>
+		<li> 
+			<subtitle> Execution: </subtitle>
+			<div class ="subsubtitle"> A. Sending an alert </div>
 				<p1> The command used: </p1>
-					<img src="img/alert_code.png">
+					<div> <img src="img/alert_code.png"> </div>
 				<p1> Here, we injected an window.alert() into to script tag, and this runs everytime the page is reloaded. </p1>
-					<img src= "img/alert_img.png"> 
-			<p> Redirecting the page </p>
+					<div> <img src= "img/alert_img.png"> </div>
+			<div class ="subsubtitle"> B. Redirecting the page </div>
 				<p1> The command used: </p1>
-					<img src="img/redirect_code.png">
+					<div> <img src="img/redirect_code.png"> </div>
 				<p1> In this hack, we injected an window.location="website_link_here", and again, this will run everytime the page is loaded, and will redirect to whatever the link is. Here, it will redirect to Taylor Swift's "Blank Space" music video. </p1>
-					<img src="img/redirect_img.png">
-		<li> Severity of the issue: HIGH <li>
-			<p> This is an extremely dangerous vulnerability. Since hackers are capable of injecting any code into the website, they are essentially capable of breaking the website in a plethora of ways. </p>
-		<li> Improvements </li>
-			<p> Sanitize the data. After reading the message string, and before inputting the document into the collection, test the strings for characters such as "<" and ">", and convert them to {$gt} and {$lt}. Extra testing could include testing for the word "script." </p>
+					<div> <img src="img/redirect_img.png"> </div>
+		</li>
+	
+		<li> <subtitle> Severity of the issue: HIGH </subtitle>
+			<div> <subtitleItem> This is an extremely dangerous vulnerability. Since hackers are capable of injecting any code into the website, they are essentially capable of breaking the website in a plethora of ways. 
+			</subtitleItem> </div>
+		</li>
+		<li> 
+			<subtitle> Improvements: </subtitle>
+			<div> <subtitleItem> Sanitize the data. After reading the message string, and before inputting the document into the collection, test the strings for characters such as "<" and ">", and convert them to {$gt} and {$lt}. Extra testing could include testing for the word "script." </subtitleItem> </div>
+		</li>
+
 	</ul>
 
 	<h3> 2. Injection </h3>
 	<ul> 
-		<li> Location: </li>
-			<p> /sendLocation </p>
-		<li> Description </li>
-			<p> Similar to issue #1, this vulnerability arises from inputting harmful code into the database. Instead of injecting the < script > tag, wrap the message in a < style > tag and therefore we can alter the webpage's visibility. </p>
-		<li> Execution </li>
-			<p> Hiding the body of the page </p>
+		<li> 
+			<subtitle> Location: </subtitle> <subtitleItem> /sendLocation </subtitleItem> 
+		</li>
+			
+		<li> 
+			<subtitle> Description: </subtitle> 
+				<subtitleItem> 
+				Similar to issue #1, this vulnerability arises from inputting harmful code into the database. Instead of injecting the < script > tag, wrap the message in a < style > tag and therefore we can alter the webpage's visibility.
+				</subtitleItem>
+		</li>
+		<li> 
+			<subtitle> Execution: </subtitle>
+			<div> 
+				<p1> Through the style tag, we can make the page display nonviewable, such as hiding the body element.</p1> </div>
 				<p1> The command used: </p1>
-					<img src="img/style_code.png">
+					<div> <img src="img/style_code.png"> </div>
 				<p1> In this hack, we change the display of the body to none, effectively showing a blank screen. </p1>
-					<img src="img/style_img.png">
-		<li> Severity of issue: MODERATE </li>
-			<p> Though this attack does input malicious code into the server, it only affects the viewability of the website. If the user has knowledge of basic HTML and developer tools, the user can uncheck the harmful style element and the results would be visible again. However, without this knowledge, the website is basically useless, as its visibility is obstructed. </p>
-			<img src="img/style_hide.png">
-			<img src="img/style_show.png">
-		<li> Improvements </li>
-			<p> Similar to the issue above, an easy fix for this issue is to sanitize the data. Check for "<" and ">" characters, and conver them to {$gt} and {$lt}. Extra testing could include testing for the word "style."</p>
+					<div> <img src="img/style_img.png"> </div>
+		</li>
+
+		<li> <subtitle> Severity of the issue: MODERATE </subtitle>
+			<div> <subtitleItem> 
+				Though this attack does input malicious code into the server, it only affects the viewability of the website. If the user has knowledge of basic HTML and developer tools, the user can uncheck the harmful style element and the results would be visible again. However, without this knowledge, the website is basically useless, as its visibility is obstructed. 
+				<div> <img src="img/style_hide.png"> <img src="img/style_show.png">  </div>
+
+			</subtitleItem> </div>
+		</li>
+		<li> 
+			<subtitle> Improvements: </subtitle>
+			<div> <subtitleItem> 
+				Similar to the issue above, an easy fix for this issue is to sanitize the data. Check for "<" and ">" characters, and conver them to {$gt} and {$lt}. Extra testing could include testing for the word "style."
+			</subtitleItem> </div>
+		</li>
 	</ul>
 
 	<h3> 3. Flooding the Database </h3>
-	<ul>
-		<li> Location: </li>
-			<p> /sendLocation </p>
-		<li> Description </li>
-			<p> Assuming that the mongodb database is not under a paid plan, only 500MB of storage is allowed. This hack will flood the database with results, causing it to either crash, or bill the owner of the server, of which both are undesireable results.</p>
-		<li> Execution </li>
-			<p> Manually injecting 500MB worth of data is simply not feasible. Instead, I have written a simple bash script that will add to the database infinitely. </p>
-			<p> The command </p>
-				<img src="img/curl_code.png">
+	<ul> 
+		<li> 
+			<subtitle> Location: </subtitle> <subtitleItem> /sendLocation </subtitleItem> 
+		</li>
+			
+		<li> 
+			<subtitle> Description: </subtitle> 
+				Assuming that the mongodb database is not under a paid plan, only 500MB of storage is allowed. This hack will flood the database with results, causing it to either crash, or bill the owner of the server, of which both are undesireable results.
+			</subtitleItem>
+		</li>
 
+		<li> 
+			<subtitle> Execution: </subtitle>
+				<div> <p1> Manually injecting 500MB worth of data is simply not feasible. Instead, I have written a simple bash script that will add to the database infinitely. </p1>
+				<p1> The command used: </p1>
+					<div> <img src="img/curl_code.png"> </div>
 				<p1> While the code is running: </p1>
-				<img src="img/curl_terminal.png">
-
+					<div> <img src="img/curl_terminal.png"> </div>
 				<p1> We can see that it is filling up the results: </p1>
-				<img src="img/curl_display.png">
-		<li> Severity of issue: HIGH </li>
-				<p> This is a very dangerous vulnerability as the entire server could crash as a result of the database being full. </p>
-		<li> Improvements </li>
-				<p> The server can have a reject numerous data insertions from the same user one after another. </p>
+					<div> <img src="img/curl_display.png"> </div> </div>
+		</li>
+
+		<li> <subtitle> Severity of the issue: HIGH </subtitle>
+			<div> <subtitleItem> 
+				This is a very dangerous vulnerability as the entire server could crash as a result of the database being full.
+				</subtitleItem> </div>
+		</li>
+		<li> 
+			<subtitle> Improvements: </subtitle>
+			<div> <subtitleItem> 
+			The server can have a reject numerous data insertions from the same user one after another.
+			</subtitleItem> </div>
+		</li>
 	</ul>
 
 	<h3> 4. Query Parameters </h3>
-	<ul>
-		<li> Location: </li>
-			<p> /latest.json </p>
-		<li> Description: </li>
-			<p> By sending "login[$ne]=any_approved_login" as a query parameter, the server cannot handle this request and times out.   </p>
-		<li> Execution </li>
-			<p> The command </p>
-			<img src="img/query_code.png"> 
-			<p> When a GET request is made with the login={$ne}any_approved_login, the server does not correctly parse the data and return a JSON object that is not any_approved_login. Instead, the server returns a 503 error, and pauses. </p>
-			<img src="img/query_display.png">
-			<p> And using Postman, we can see that a 503 internal server error occurred </p>
-			<img src="img/query_postman.png">
-			<p> From checking heroku logs, we can see that the request timed out. </p>
-			<img src="img/request_timeout.png">
+	<ul> 
+		<li> 
+			<subtitle> Location: </subtitle> <subtitleItem> /latest.json </subtitleItem> 
+		</li>
+			
+		<li> 
+			<subtitle> Description: </subtitle> 
+				By sending "login[$ne]=any_approved_login" as a query parameter, the server cannot handle this request and times out. 
+			</subtitleItem>
+		</li>
 
-		<li> Severity of the issue: HIGH <li>
-			<p> Putting [$ne] in the query parameters caused the request to timeout. </p>
-		<li> Improvements </li>
-			<p> After analyzing Deanna's code, I believe I have found the reason why her server does not correctly return login[$ne]=mchow. Her code:<img src="img/deanna_code.png">. Instead, perhaps the query should be parsed differently, by an equals sign. <img src="img/my_code.png">. This would solve the issue of a request timeout.  </p>
+		<li> 
+			<subtitle> Execution: </subtitle>
+			<div> 
+				<p> The command </p>
+				<div> <img src="img/query_code.png"> </div>
+				<p> When a GET request is made with the login={$ne}any_approved_login, the server does not correctly parse the data and return a JSON object that is not any_approved_login. Instead, the server returns a 503 error, and pauses. </p>
+				<div> <img src="img/query_display.png"> </div>
+				<p> And using Postman, we can see that a 503 internal server error occurred </p>
+				<div> <img src="img/query_postman.png"> </div>
+				<p> From checking heroku logs, we can see that the request timed out. </p>
+				<div> <img src="img/request_timeout.png"> </div>
+			</div>
+		</li>
+
+		<li> <subtitle> Severity of the issue: HIGH </subtitle>
+			<div> <subtitleItem> 
+				Putting [$ne] in the query parameters caused the request to timeout.
+				</subtitleItem> </div>
+		</li>
+		<li> 
+			<subtitle> Improvements: </subtitle>
+			<div> <subtitleItem> 
+			After analyzing Deanna's code, I believe I have found the reason why her server does not correctly return login[$ne]=mchow. Her code: 
+			<div> <img src="img/deanna_code.png" style="width: 20%"> </div> 
+			Instead, perhaps the query should be parsed differently, by an equals sign. 
+			<div> <img src="img/my_code.png" style="width: 20%"> </div> 
+			This would solve the issue of a request timeout.
+			</subtitleItem> </div>
+		</li>
 	</ul>
 
-
 	<h3> 5. Authentication </h3>
-	<ul>
-		<li> Location: </li>
-			<p> /sendLocation. A list of all of the approved logins exist on the same page, and this is a vulnerability. </p>
-		<li> Description </li>
-			<p> Although there is a list of approved logins, there is no authentication on the website application. Anyone can claim to be one of those approved logins.  </p>
-		<li> Execution </li>
-			<p> The command </p>
-				<img src="img/impersonation_code.png">
-			<p> Here, I am simply stating that my login is mchow, and the server never checks that I am merely impersonating him. </p>
-				<img src="img/impersonation.png">
-		<li> Severity of the issue: HIGH </li>
-			<p> Since none of the login information can be validated, essentially all of the logs cannot be trusted as anyone could have claimed to be anyone else. </p>
-		<li> Improvements </li>
-			<p> The list of approved logins should be moved to a separate file, and not stored in the same file as the server. In addition, implementing some form of authentication to check that the user is the login name that they claim to be, such as facebook or google API. </p>
+	<ul> 
+		<li> 
+			<subtitle> Location: </subtitle> <subtitleItem> /sendLocation </subtitleItem> 
+		</li>
+			
+		<li> 
+			<subtitle> Description: </subtitle> 
+				Although there is a list of approved logins, there is no authentication on the website application. Anyone can claim to be one of those approved logins.A list of all of the approved logins exist on the same page, and this is a vulnerability. 
+			</subtitleItem>
+		</li>
+
+		<li> 
+			<subtitle> Execution: </subtitle>
+			<div> 
+				<p> The command </p>
+				<div> <img src="img/impersonation_code.png"> </div>
+				<p> Here, I am simply stating that my login is mchow, and the server never checks that I am merely impersonating him. </p>
+				<div> <img src="img/impersonation.png"> </div>
+			</div>
+		</li>
+
+
+		<li> <subtitle> Severity of the issue: HIGH </subtitle>
+			<div> <subtitleItem> 
+				Since none of the login information can be validated, essentially all of the logs cannot be trusted as anyone could have claimed to be anyone else.
+				</subtitleItem> </div>
+		</li>
+		<li> 
+			<subtitle> Improvements: </subtitle>
+			<div> <subtitleItem> 
+			The list of approved logins should be moved to a separate file, and not stored in the same file as the server. In addition, implementing some form of authentication to check that the user is the login name that they claim to be, such as facebook or google API.
+			</subtitleItem> </div>
+		</li>
 	</ul>
 
 	<h2> Conclusion </h2>
