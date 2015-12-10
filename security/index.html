@@ -165,7 +165,7 @@
 			<div> 
 				<p> The command </p>
 				<div> <img src="img/query_code.png"> </div>
-				<p> When a GET request is made with the login={$ne}any_approved_login, the server does not correctly parse the data and return a JSON object that is not any_approved_login. Instead, the server returns a 503 error, and pauses. </p>
+				<p> When a GET request is made with the login=[$ne]any_approved_login, the server does not correctly parse the data and return a JSON object that is not any_approved_login. Instead, the server returns a 503 error, and pauses. </p>
 				<div> <img src="img/query_display.png"> </div>
 				<p> And using Postman, we can see that a 503 internal server error occurred </p>
 				<div> <img src="img/query_postman.png"> </div>
@@ -186,7 +186,7 @@
 			<div> <img src="img/deanna_code.png" style="width: 20%"> </div> 
 			Instead, perhaps the query should be parsed differently, by an equals sign. 
 			<div> <img src="img/my_code.png" style="width: 20%"> </div> 
-			This would solve the issue of a request timeout.
+			This would solve the issue.
 			</subtitleItem> </div>
 		</li>
 	</ul>
