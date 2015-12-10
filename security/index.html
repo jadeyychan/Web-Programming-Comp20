@@ -38,7 +38,7 @@
 
 	<h2> Issues Found </h2>
 
-	<h3> 1. Cross-Site Scripting (XSS) + Injection </h3>
+	<h3> 1. Cross-Site Scripting (XSS) </h3>
 	<ul>
 		<li> Location: </li>
 			<p> /sendLocation </p>
@@ -64,7 +64,7 @@
 			<p> Sanitize the data. After reading the message string, and before inputting the document into the collection, test the strings for characters such as "<" and ">", and convert them to {$gt} and {$lt}. Extra testing could include testing for the word "script." </p>
 	</ul>
 
-	<h3> 2. Cross-Site Scripting (XSS) + Injection (Styling) </h3>
+	<h3> 2. Injection </h3>
 	<ul> 
 		<li> Location: </li>
 			<p> /sendLocation </p>
@@ -103,7 +103,7 @@
 		<li> Severity of issue: HIGH </li>
 				<p> This is a very dangerous vulnerability as the entire server could crash as a result of the database being full. </p>
 		<li> Improvements </li>
-				<p> The server can have a few more checks that reject numerous data insertions from the same user one after another. </p>
+				<p> The server can have a reject numerous data insertions from the same user one after another. </p>
 	</ul>
 
 	<h3> 4. Query Parameters </h3>
@@ -111,18 +111,21 @@
 		<li> Location: </li>
 			<p> /latest.json </p>
 		<li> Description: </li>
-			<p> ?????? </p>
+			<p> By sending "login[$ne]=any_approved_login" as a query parameter, the server cannot handle this request and times out.   </p>
 		<li> Execution </li>
 			<p> The command </p>
 			<img src="img/query_code.png"> 
-			<p> When a GET request is made with the login={$ne}approvedlogin, the server does not correctly parse the data and return a JSON object that is not approvedlogin. Instead, the server returns a 503 error, and pauses. </p>
+			<p> When a GET request is made with the login={$ne}any_approved_login, the server does not correctly parse the data and return a JSON object that is not any_approved_login. Instead, the server returns a 503 error, and pauses. </p>
 			<img src="img/query_display.png">
 			<p> And using Postman, we can see that a 503 internal server error occurred </p>
 			<img src="img/query_postman.png">
+			<p> From checking heroku logs, we can see that the request timed out. </p>
+			<img src="img/request_timeout.png">
+
 		<li> Severity of the issue: HIGH <li>
-			<p> Putting {$ne} in the query parameters crashed the app, and it did not restart. </p>
+			<p> Putting [$ne] in the query parameters caused the request to timeout. </p>
 		<li> Improvements </li>
-			<p> ???? </p>
+			<p> After analyzing Deanna's code, I believe I have found the reason why her server does not correctly return login[$ne]=mchow. Her code:<img src="img/deanna_code.png">. Instead, perhaps the query should be parsed differently, by an equals sign. <img src="img/my_code.png">. This would solve the issue of a request timeout.  </p>
 	</ul>
 
 
@@ -135,11 +138,12 @@
 		<li> Execution </li>
 			<p> The command </p>
 				<img src="img/impersonation_code.png">
-			<p> Here, I am simply stating that my login is mchow, and I am impersonating him. </p>
+			<p> Here, I am simply stating that my login is mchow, and the server never checks that I am merely impersonating him. </p>
+				<img src="img/impersonation.png">
 		<li> Severity of the issue: HIGH </li>
 			<p> Since none of the login information can be validated, essentially all of the logs cannot be trusted as anyone could have claimed to be anyone else. </p>
 		<li> Improvements </li>
-			<p> The list of approved logins should be moved to a separate file, and not stored in the same file as the server. In addition, implementing some form of authentication to check that the user is the login name, such as facebook or google API. </p>
+			<p> The list of approved logins should be moved to a separate file, and not stored in the same file as the server. In addition, implementing some form of authentication to check that the user is the login name that they claim to be, such as facebook or google API. </p>
 	</ul>
 
 	<h2> Conclusion </h2>
