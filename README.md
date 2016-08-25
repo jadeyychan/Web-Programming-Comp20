@@ -1,4 +1,16 @@
-# comp20-jchan
+# Web Programming - Comp 20
+Jade Chan
+
+---
+
+This repository contains the labs and assignments for Tufts University's Web Programming class, taught by Ming Chow. 
+    - Mapchat -  Google Maps API
+    - Messages - HTTP GET request 
+    - Duckhunt - Canvas
+    - Responsive - Responsive design 
+    - Captainslog - JQuery
+
+---
 
 1. What is the purpose of this Git repository?
 The purpose of this Git repository is to serve as a portfolio, to showcase and document the work I've completed in Comp 20 - Web Programming Fall 2015. 
